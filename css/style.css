@@ -1,0 +1,36 @@
+
+h1{ position: relative;
+    margin: 23px;
+    text-align: center;
+}
+
+h4{
+    margin: 13px;
+    padding: 34px;
+    border-radius: 5px;
+    background: solid 1px black;
+    background-color: brown;
+
+}
+#titreFormulaire{
+    padding: 25px;
+}
+
+#logo{
+    margin: 0px;
+    position: relative;
+    height: 15%;
+}
+
+#rechercheDoc{
+    margin-top: 100px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+form{
+    border: solid 1px black;
+    text-align: center;
+    margin: 34px;
+    padding: 8px;
+}
