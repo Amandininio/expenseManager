@@ -13,12 +13,7 @@ class MissionManager extends Manager
     'commentaire',
     'statut',
     'fkCommercial'
-  ];
-
-  public function __construct(){
-    $this->connectDB();
-    $this->valuesPDO();
-  }
+  ];  
 
   public function read(int $id){
     $values=parent::read($id);
@@ -30,8 +25,8 @@ class MissionManager extends Manager
     return $this->buildTableau($values);
   }
 
-  public function readAllFk(int $idCommercial){
-    $values=parent::readAllFk($idCommercial);
+  public function readAllFk($Commercial){
+    $values=parent::readAllFk($Commercial);
     return $this->buildTableau($values);
   }
 
@@ -44,7 +39,8 @@ class MissionManager extends Manager
   }
 
   private conditionFk(){
-    return $this->champs[4].'=:'.$this->champs[4];
+    $FkCommercial=$this->champs[4];
+    return $FkCommercial.'=:'.$FkCommercial;
   }
 
   protected function bindId($req,$id){

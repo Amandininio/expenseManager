@@ -11,6 +11,11 @@ abstract class Manager {
   private $dbOption = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
   protected $db, $table,$champs,$valuesPDO;
 
+  public function __construct(){
+    $this->connectDB();
+    $this->valuesPDO();
+  }
+
   protected function connectDB(){
     $this->db=new PDO($this->dbInfo,$this->dbUser,$this->dbMdp,$this->dbOption);
   }
@@ -55,12 +60,12 @@ abstract class Manager {
     return $req->fetchALL(PDO::FETCH_ASSOC);
   }
 
-  public function readAllFk(int $id){
+  public function readAllFk(Entity $entity){
 
     $sql='SELECT * FROM'.$this->table.'WHERE'.$this->conditionFk();
 
     $req=$this->db->prepare($sql);
-    $this->bindFkMission($req,$id);
+    $this->bindFk($req,$entity->getId());
     $req->execute();
 
     return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -83,7 +88,7 @@ abstract class Manager {
     $sql = 'DELETE FROM '.$this->table.' WHERE '.$this->conditionId();
 
     $req=$this->db->prepare($sql);
-    $this->bindId($req,$id);
+    $this->bindId($req,$entity->getId());
     $req->execute();
   }
 

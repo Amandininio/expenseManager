@@ -5,14 +5,12 @@
  */
 class FactureManager extends NdfManager {
 
-  function __construct()
-  {
-    $this->connectDB();
+  function __construct(){
     $this->champs+=[
       'photo',
       'montant'
     ];
-    $this->valuesPDO();
+    parent::__construct();
   }
 
   public function read(int $id){
@@ -20,17 +18,8 @@ class FactureManager extends NdfManager {
     return new Facture($values);
   }
 
-  public function readAll(){
-    $values=parent::readAll();
-    $tableau=[];
-    foreach ($values as $value) {
-      $tableau[]= new Facture($value);
-    }
-    return $tableau;
-  }
-
   protected function bindvaluesPDO($req,$facture){
-    $this->bindvaluesNdfPDO($req,$facture);
+    $this->bindvaluesNdf($req,$facture);
     $req->bindValue($this->values[count($this->champs)],$facture->getPhoto(),PDO::PARAM_INT);
     $req->bindValue($this->values[count($this->champs)+1],$facture->getMontant(),PDO::PARAM_STR);
   }

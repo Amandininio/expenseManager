@@ -5,7 +5,7 @@
  */
 class Entreprise extends Entity {
 
-  private $id,$raisonSociale,$adresse,$codePostal,$ville;
+  private $id,$siret,$raisonSociale,$adresse,$codePostal,$ville;
 
   function __construct($values=null){
     if($values){
@@ -15,6 +15,10 @@ class Entreprise extends Entity {
 
   public function getId(){
     return $this->id;
+  }
+
+  public function getSiret(){
+    return $this->$siret;
   }
 
   public function getRaisonSociale(){

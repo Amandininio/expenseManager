@@ -12,21 +12,11 @@ class PortefeuilleManager extends Manager {
     'fkClient'
   ];
 
-  public function __construct(){
-    $this->connectDB();
-    $this->valuesPDO();
-  }
-
-  public function read(int $id){
-    $values=parent::read($id);
-    return new Portefeuille($values);
-  }
-
-  public function readAll(){
-    $values=parent::readAll();
+  public function readAllFk($Commercial){
+    $values=parent::readAllFk();
     $tableau=[];
     foreach ($values as $value) {
-      $tableau[]= new Portefeuille($value);
+      $tableau[]= $value['fkClient'];
     }
     return $tableau;
   }
