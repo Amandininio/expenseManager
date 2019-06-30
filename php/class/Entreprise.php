@@ -18,7 +18,7 @@ class Entreprise extends Entity {
   }
 
   public function getSiret(){
-    return $this->$siret;
+    return $this->siret;
   }
 
   public function getRaisonSociale(){
@@ -39,6 +39,10 @@ class Entreprise extends Entity {
 
   public function setId($id){
     $this->id=$id;
+  }
+
+  public function setSiret($siret){
+    $this->siret=$siret;
   }
 
   public function setRaisonSociale($raisonSociale){

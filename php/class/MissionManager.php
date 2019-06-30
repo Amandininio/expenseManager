@@ -13,7 +13,15 @@ class MissionManager extends Manager
     'commentaire',
     'statut',
     'fkCommercial'
-  ];  
+  ];
+
+  protected $paramPDO=[
+    PDO::PARAM_INT,
+    PDO::PARAM_STR,
+    PDO::PARAM_STR,
+    PDO::PARAM_STR,
+    PDO::PARAM_INT
+  ];
 
   public function read(int $id){
     $values=parent::read($id);
@@ -25,8 +33,8 @@ class MissionManager extends Manager
     return $this->buildTableau($values);
   }
 
-  public function readAllFk($Commercial){
-    $values=parent::readAllFk($Commercial);
+  public function readAllFkCommercial($Commercial){
+    $values=$this->readAllFk($Commercial, 'fkCommercial');
     return $this->buildTableau($values);
   }
 
@@ -36,25 +44,5 @@ class MissionManager extends Manager
       $tableau[]= new Mission($value);
     }
     return $tableau;
-  }
-
-  private conditionFk(){
-    $FkCommercial=$this->champs[4];
-    return $FkCommercial.'=:'.$FkCommercial;
-  }
-
-  protected function bindId($req,$id){
-    $req->bindValue($this->valuesPDO[$this->champs[0]],$id,PDO::PARAM_INT);
-  }
-
-  protected function bindFk($req,$fk){
-    $req->bindValue($this->values[$this->champs[4]],$fk,PDO::PARAM_INT);
-  }
-
-  protected function bindvaluesPDO($req,$mission){
-    $req->bindValue($this->values[$this->champs[1]],$mission->getnom(),PDO::PARAM_STR);
-    $req->bindValue($this->values[$this->champs[2]],$mission->getcommentaire(),PDO::PARAM_STR);
-    $req->bindValue($this->values[$this->champs[3]],$mission->getStatut(),PDO::PARAM_STR);
-    $this->bindFk($req,$mission->getFkCommercial());
   }
 }

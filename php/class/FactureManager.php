@@ -10,17 +10,15 @@ class FactureManager extends NdfManager {
       'photo',
       'montant'
     ];
+    $paramPDO+=[
+      PDO::PARAM_LOB,
+      PDO::PARAM_INT
+    ];
     parent::__construct();
   }
 
   public function read(int $id){
     $values=parent::read($id);
     return new Facture($values);
-  }
-
-  protected function bindvaluesPDO($req,$facture){
-    $this->bindvaluesNdf($req,$facture);
-    $req->bindValue($this->values[count($this->champs)],$facture->getPhoto(),PDO::PARAM_INT);
-    $req->bindValue($this->values[count($this->champs)+1],$facture->getMontant(),PDO::PARAM_STR);
   }
 }
