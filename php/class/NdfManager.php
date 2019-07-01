@@ -7,36 +7,49 @@ abstract class NdfManager extends Manager
 {
   protected $table='noteDeFrais';
   protected $champs=[
-    'id',
-    'raison',
-    'dateNDF',
-    'comCommercial',
-    'remboursement',
-    'comComptable',
-    'fkMission'
+    [
+      'nom'=>'id',
+      'PDO'=>PDO::PARAM_INT
+    ],
+    [
+      'nom'=>'raison',
+      'PDO'=>PDO::PARAM_STR
+    ],
+    [
+      'nom'=>'dateNDF',
+      'PDO'=>PDO::PARAM_STR
+    ],
+    [
+      'nom'=>'comCommercial',
+      'PDO'=>PDO::PARAM_STR
+    ],
+    [
+      'nom'=>'remboursement',
+      'PDO'=>PDO::PARAM_INT
+    ],
+    [
+      'nom'=>'comComptable',
+      'PDO'=>PDO::PARAM_STR
+    ],
+    [
+      'nom'=>'fkMission',
+      'PDO'=>PDO::PARAM_INT
+    ]
   ];
 
-  protected $paramPDO=[
-    PDO::PARAM_INT,
-    PDO::PARAM_STR,
-    PDO::PARAM_STR,
-    PDO::PARAM_STR,
-    PDO::PARAM_STR,
-    PDO::PARAM_STR,
-    PDO::PARAM_INT
-  ];
-
-  public static function readAllFkMission($Mission){
+  public static function readWhereFkMission($Mission){
     parent::__construct();
-    $values=parent::readAllFk($Mission, 'fkMission');
-    $tableau=[];
-    foreach ($values as $value) {
-      if($value['raison']=='trajet'){
-        $tableau[]= new Trajet($value);
-      } else {
-        $tableau[]= new Facture($value);
+    $values=parent::readWhereValue($Mission->getId(), 'fkMission');
+    if ($values) {
+      $tableau=[];
+      foreach ($values as $value) {
+        if($value['raison']=='trajet'){
+          $tableau[]= new Trajet($value);
+        } else {
+          $tableau[]= new Facture($value);
+        }
       }
+      return $tableau;
     }
-    return $tableau;
   }
 }

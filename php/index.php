@@ -4,10 +4,10 @@ require_once ('functions.php');
 
 
 $entrepriseManager = new EntrepriseManager();
-$en=new MissionManager();
+$en=new UserManager();
 $ent= new Entreprise;
 $ent->setRaisonSociale('sugar');
-$ent->setAdresse('69 place daddy');
+$ent->setAdresse('999 place daddy');
 $ent->setCodePostal('56320');
 $ent->setVille('candyland');
 $ent->setSiret('464 636 426 9569');

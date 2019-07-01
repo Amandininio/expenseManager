@@ -7,18 +7,29 @@ abstract class PersonneManager extends Manager {
 
   protected $table='personnes';
   protected $champs=[
-    'id',
-    'nom',
-    'prenom',
-    'telephone',
-    'email'
+    [
+      'nom'=>'id',
+      'PDO'=> PDO::PARAM_INT
+    ],
+    [
+      'nom'=>'nom',
+      'PDO'=>PDO::PARAM_STR
+    ],
+    [
+      'nom'=>'prenom',
+      'PDO'=>PDO::PARAM_STR
+    ],
+    [
+      'nom'=>'telephone',
+      'PDO'=>PDO::PARAM_INT
+    ],
+    [
+      'nom'=>'email',
+      'PDO'=>PDO::PARAM_STR
+    ]
   ];
 
-  protected $paramPDO=[
-    PDO::PARAM_INT,
-    PDO::PARAM_STR,
-    PDO::PARAM_STR,
-    PDO::PARAM_INT,
-    PDO::PARAM_STR
-  ];
+  public function readWhereEmail($email){
+    $values=$this->readWhereValue($email,'email');
+  }
 }

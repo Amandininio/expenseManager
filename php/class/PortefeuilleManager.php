@@ -7,23 +7,28 @@ class PortefeuilleManager extends Manager {
 
   protected $table='portefeuille';
   protected $champs=[
-    'id',
-    'fkCommercial',
-    'fkClient'
+    [
+      'nom'=>'id',
+      'PDO'=>PDO::PARAM_INT
+    ],
+    [
+      'nom'=>'fkCommercial',
+      'PDO'=>PDO::PARAM_INT
+    ],
+    [
+      'nom'=>'fkClient',
+      'PDO'=>PDO::PARAM_INT
+    ]
   ];
 
-  $paramPDO=[
-    PDO::PARAM_INT,
-    PDO::PARAM_INT,
-    PDO::PARAM_INT
-  ];
-
-  public function readAllFkCommercial($Commercial){
-    $values=parent::readAllFk($Commercial,'fkCommercial');
-    $tableau=[];
-    foreach ($values as $value) {
-      $tableau[]= $value['fkClient'];
+  public function readWhereFkCommercial($Commercial){
+    $values=$this->readWhereValue($Commercial->getId(),'fkCommercial');
+    if ($values) {
+      $tableau=[];
+      foreach ($values as $value) {
+        $tableau[]= new portefeuille($value);
+      }
+      return $tableau;
     }
-    return $tableau;
   }
 }

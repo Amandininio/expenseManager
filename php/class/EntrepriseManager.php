@@ -8,34 +8,45 @@ class EntrepriseManager extends Manager
 
   protected $table='entreprise';
   protected $champs=[
-    'id',
-    'siret',
-    'raisonSociale',
-    'adresse',
-    'codePostal',
-    'ville',
-  ];
-
-  protected $paramPDO=[
-    PDO::PARAM_INT,
-    PDO::PARAM_STR,
-    PDO::PARAM_STR,
-    PDO::PARAM_STR,
-    PDO::PARAM_INT,
-    PDO::PARAM_STR
+    [
+      'nom'=>'id',
+      'PDO'=> PDO::PARAM_INT
+    ],
+    [
+      'nom'=>'siret',
+      'PDO'=> PDO::PARAM_STR
+    ],
+    [
+      'nom'=>'raisonSociale',
+      'PDO'=> PDO::PARAM_STR
+    ],
+    [
+      'nom'=>'adresse',
+      'PDO'=> PDO::PARAM_STR
+    ],
+    [
+      'nom'=>'codePostal',
+      'PDO'=> PDO::PARAM_INT
+    ],
+    [
+      'nom'=>'ville',
+      'PDO'=> PDO::PARAM_STR
+    ],
   ];
 
   public function read(int $id){
-    $values=parent::read($id);
+    $values=$this->readWhereValue($id,'id');
     return new Entreprise($values);
   }
 
   public function readAll(){
     $values=parent::readAll();
-    $tableau=[];
-    foreach ($values as $value) {
-      $tableau[]= new Entreprise($value);
+    if ($values) {
+      $tableau=[];
+      foreach ($values as $value) {
+        $tableau[]= new Entreprise($value);
+      }
+      return $tableau;
     }
-    return $tableau;
   }
 }

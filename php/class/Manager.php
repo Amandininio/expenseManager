@@ -9,29 +9,19 @@ abstract class Manager {
   private $dbUser = 'root';
   private $dbMdp = '';
   private $dbOption = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
-  protected $db, $table, $champs, $valuesPDO, $paramPDO;
+  protected $db, $table, $champs;
 
   public function __construct(){
-    $this->connectDB();
-    $this->valuesPDO();
-  }
-
-  protected function connectDB(){
     $this->db=new PDO($this->dbInfo,$this->dbUser,$this->dbMdp,$this->dbOption);
-  }
-
-  protected function valuesPDO(){
-    foreach ($this->champs as $value) {
-      $this->valuesPDO[$value]=':'.$value;
-    }
   }
 
   public function create(Entity $entity){
 
     $champs=$this->strWithoutIdChamps();
-    $valuesPDO=$this->strWithoutIdValuesPDO();
+    $nomsChamps=$champs['noms'];
+    $valuesPDO=$champs['PDO'];
 
-    $sql = 'INSERT INTO '.$this->table." ($champs) VALUES ($valuesPDO)";
+    $sql = 'INSERT INTO '.$this->table." ($nomsChamps) VALUES ($valuesPDO)";
 
     $req=$this->db->prepare($sql);
     $this->bindvaluesPDO($req,$entity);
@@ -41,14 +31,19 @@ abstract class Manager {
     $entity->setId($id);
   }
 
-  public function read(int $id){
+  public function readWhereValue($value, string $champ){
 
-    $sql = 'SELECT * FROM '.$this->table.' WHERE '.$this->condition('id');
+    $sql='SELECT * FROM '.$this->table.' WHERE '.$this->condition($champ);
 
     $req=$this->db->prepare($sql);
-    $this->bindValue($req,$id,'id');
+    $this->bindValue($req,$value,$champ);
     $req->execute();
-    return $req->fetch(PDO::FETCH_ASSOC);
+    $values=$req->fetchAll(PDO::FETCH_ASSOC);
+    if (sizeof($values)==1) {
+      return $values[0];
+    } else {
+      return $values;
+    }
   }
 
   public function readAll(){
@@ -58,17 +53,6 @@ abstract class Manager {
     $req=$this->db->prepare($sql);
     $req->execute();
     return $req->fetchALL(PDO::FETCH_ASSOC);
-  }
-
-  public function readAllFk(Entity $entity, string $fk){
-
-    $sql='SELECT * FROM'.$this->table.'WHERE'.$this->condition($fk);
-
-    $req=$this->db->prepare($sql);
-    $this->bindValue($req,$entity->getId(),$fk);
-    $req->execute();
-
-    return $req->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function update(Entity $entity){
@@ -94,12 +78,16 @@ abstract class Manager {
 
   private function strWithoutIdChamps(){
     $champs=array_slice($this->champs,1);
-    return implode(',',$champs);
-  }
-
-  private function strWithoutIdValuesPDO(){
-    $valuesPDO=array_slice($this->valuesPDO,1);
-    return implode(',',$valuesPDO);
+    $noms=[];
+    $values=[];
+    foreach ($champs as $champ) {
+      $noms[]=$champ['nom'];
+      $values[]=$champ['PDO'];
+    }
+    return [
+      'noms' => implode(',',$noms),
+      'PDO' => implode(',',$values)
+    ];
   }
 
   private function condition($champ){
@@ -109,28 +97,25 @@ abstract class Manager {
   private function lierChampsValuesPDO(){
     $return='';
     foreach ($this->champs as $champ) {
-      $return.=$champ.'='.$this->valuesPDO[$champ].',';
+      $return.=$champ['nom'].'=:'.$champ['nom'].',';
     }
     return substr($return,0,-1);
   }
 
   protected function bindValue($req,$value,$type){
     foreach ($this->champs as $key => $champ) {
-      if ($champ==$type) {
-        $req->bindValue($this->valuesPDO[$champ],$value,$this->paramPDO[$key]);
+      if ($champ['nom']==$type) {
+        $req->bindValue(':'.$champ['nom'],$value,$champ['PDO']);
       }
     }
   }
 
   protected function bindvaluesPDO($req,Entity $entity){
     $champs=array_slice($this->champs,1);
-    $paramPDO=array_slice($this->paramPDO,1);
-    foreach ($champs as $key => $champ) {
-      $methodName = 'get'.ucfirst($champ);
-      var_dump([$key]);
+    foreach ($champs as  $champ) {
+      $methodName = 'get'.ucfirst($champ['nom']);
       if(method_exists($entity, $methodName)){
-        var_dump($methodName);
-        $req->bindValue($this->valuesPDO[$champ],$entity->$methodName(),$paramPDO[$key]);
+        $req->bindValue(':'.$champ['nom'],$entity->$methodName(),$champ['PDO']);
       }
     }
   }
