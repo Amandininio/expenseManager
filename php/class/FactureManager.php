@@ -5,33 +5,24 @@
  */
 class FactureManager extends NdfManager {
 
-  function __construct()
-  {
-    $this->connectDB();
+  function __construct(){
     $this->champs+=[
-      'photo',
-      'montant'
+      [
+        'nom'=>'photo',
+        'PDO'=>PDO::PARAM_LOB
+      ],
+      [
+        'nom'=>'montant',
+        'PDO'=>PDO::PARAM_INT
+      ]
     ];
-    $this->valuesPDO();
+    parent::__construct();
   }
 
   public function read(int $id){
-    $values=parent::read($id);
-    return new Facture($values);
-  }
-
-  public function readAll(){
-    $values=parent::readAll();
-    $tableau=[];
-    foreach ($values as $value) {
-      $tableau[]= new Facture($value);
+    $values=$this->readWhereValue($id,'id');
+    if ($values) {
+      return new Facture($values);
     }
-    return $tableau;
-  }
-
-  protected function bindvaluesPDO($req,$facture){
-    $this->bindvaluesNdfPDO($req,$facture);
-    $req->bindValue($this->values[count($this->champs)],$facture->getPhoto(),PDO::PARAM_INT);
-    $req->bindValue($this->values[count($this->champs)+1],$facture->getMontant(),PDO::PARAM_STR);
   }
 }

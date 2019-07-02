@@ -12,7 +12,7 @@ class PortefeuilleManager extends Manager {
       'PDO'=>PDO::PARAM_INT
     ],
     [
-      'nom'=>'fkCommercial',
+      'nom'=>'fkNoteDeFrais',
       'PDO'=>PDO::PARAM_INT
     ],
     [
@@ -21,8 +21,8 @@ class PortefeuilleManager extends Manager {
     ]
   ];
 
-  public function readWhereFkCommercial($commercial){
-    return $this->readWhereFk($commercial,'fkCommercial')
+  public function readWhereFkNoteDeFrais($ndf){
+    return $this->readWhereFk($ndf,'fkNoteDeFrais')
   }
 
   public function readWhereFkClient($client){
@@ -34,7 +34,7 @@ class PortefeuilleManager extends Manager {
     if ($values) {
       $tableau=[];
       foreach ($values as $value) {
-        $tableau[]= new portefeuille($value);
+        $tableau[]= new noteDeFrais($value);
       }
       return $tableau;
     }

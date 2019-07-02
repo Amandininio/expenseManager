@@ -9,24 +9,19 @@ abstract class Manager {
   private $dbUser = 'root';
   private $dbMdp = '';
   private $dbOption = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
-  protected $db, $table,$champs,$valuesPDO;
+  protected $db, $table, $champs;
 
-  protected function connectDB(){
+  public function __construct(){
     $this->db=new PDO($this->dbInfo,$this->dbUser,$this->dbMdp,$this->dbOption);
-  }
-
-  protected function valuesPDO(){
-    foreach ($this->champs as $value) {
-      $this->valuesPDO[$value]=':'.$value;
-    }
   }
 
   public function create(Entity $entity){
 
     $champs=$this->strWithoutIdChamps();
-    $valuesPDO=$this->strWithoutIdValuesPDO();
+    $nomsChamps=$champs['noms'];
+    $valuesPDO=$champs['PDO'];
 
-    $sql = 'INSERT INTO '.$this->table." ($champs) VALUES ($valuesPDO)";
+    $sql = 'INSERT INTO '.$this->table." ($nomsChamps) VALUES ($valuesPDO)";
 
     $req=$this->db->prepare($sql);
     $this->bindvaluesPDO($req,$entity);
@@ -36,14 +31,19 @@ abstract class Manager {
     $entity->setId($id);
   }
 
-  public function read(int $id){
+  public function readWhereValue($value, string $champ){
 
-    $sql = 'SELECT * FROM '.$this->table.' WHERE '.$this->conditionId();
+    $sql='SELECT * FROM '.$this->table.' WHERE '.$this->condition($champ);
 
     $req=$this->db->prepare($sql);
-    $this->bindId($req,$id);
+    $this->bindValue($req,$value,$champ);
     $req->execute();
-    return $req->fetch(PDO::FETCH_ASSOC);
+    $values=$req->fetchAll(PDO::FETCH_ASSOC);
+    if (sizeof($values)==1) {
+      return $values[0];
+    } else {
+      return $values;
+    }
   }
 
   public function readAll(){
@@ -55,60 +55,70 @@ abstract class Manager {
     return $req->fetchALL(PDO::FETCH_ASSOC);
   }
 
-  public function readAllFk(int $id){
-
-    $sql='SELECT * FROM'.$this->table.'WHERE'.$this->conditionFk();
-
-    $req=$this->db->prepare($sql);
-    $this->bindFkMission($req,$id);
-    $req->execute();
-
-    return $req->fetchAll(PDO::FETCH_ASSOC);
-  }
-
   public function update(Entity $entity){
 
     $update=$this->lierChampsValuesPDO();
 
-    $sql = 'UPDATE '.$this->table." SET $update WHERE ".$this->conditionId();
+    $sql = 'UPDATE '.$this->table." SET $update WHERE ".$this->condition('id');
 
     $req=$this->db->prepare($sql);
-    $this->bindId($req,$entity->getId());
+    $this->bindValue($req,$entity->getId(),'id');
     $this->bindvaluesPDO($req,$entity);
     $req->execute();
   }
 
   public function delete(Entity $entity){
 
-    $sql = 'DELETE FROM '.$this->table.' WHERE '.$this->conditionId();
+    $sql = 'DELETE FROM '.$this->table.' WHERE '.$this->condition('id');
 
     $req=$this->db->prepare($sql);
-    $this->bindId($req,$id);
+    $this->bindValue($req,$entity->getId(),'id');
     $req->execute();
   }
 
   private function strWithoutIdChamps(){
     $champs=array_slice($this->champs,1);
-    return implode(',',$champs);
+    $noms=[];
+    $values=[];
+    foreach ($champs as $champ) {
+      $noms[]=$champ['nom'];
+      $values[]=$champ['PDO'];
+    }
+    return [
+      'noms' => implode(',',$noms),
+      'PDO' => implode(',',$values)
+    ];
   }
 
-  private function strWithoutIdValuesPDO(){
-    $valuesPDO=array_slice($this->valuesPDO,1);
-    return implode(',',$valuesPDO);
-  }
-
-  private function conditionId(){
-    return $this->champs[0].'='.$this->valuesPDO[$this->champs[0]];
+  private function condition($champ){
+    return $champ.'=:'.$champ;
   }
 
   private function lierChampsValuesPDO(){
     $return='';
     foreach ($this->champs as $champ) {
-      $return.=$champ.'='.$this->valuesPDO[$champ].',';
+      $return.=$champ['nom'].'=:'.$champ['nom'].',';
     }
     return substr($return,0,-1);
   }
 
+  protected function bindValue($req,$value,$type){
+    foreach ($this->champs as $key => $champ) {
+      if ($champ['nom']==$type) {
+        $req->bindValue(':'.$champ['nom'],$value,$champ['PDO']);
+      }
+    }
+  }
+
+  protected function bindvaluesPDO($req,Entity $entity){
+    $champs=array_slice($this->champs,1);
+    foreach ($champs as  $champ) {
+      $methodName = 'get'.ucfirst($champ['nom']);
+      if(method_exists($entity, $methodName)){
+        $req->bindValue(':'.$champ['nom'],$entity->$methodName(),$champ['PDO']);
+      }
+    }
+  }
 }
 
 

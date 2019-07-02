@@ -8,40 +8,45 @@ class EntrepriseManager extends Manager
 
   protected $table='entreprise';
   protected $champs=[
-    'id',
-    'raisonSociale',
-    'adresse',
-    'codePostal',
-    'ville',
+    [
+      'nom'=>'id',
+      'PDO'=> PDO::PARAM_INT
+    ],
+    [
+      'nom'=>'siret',
+      'PDO'=> PDO::PARAM_STR
+    ],
+    [
+      'nom'=>'raisonSociale',
+      'PDO'=> PDO::PARAM_STR
+    ],
+    [
+      'nom'=>'adresse',
+      'PDO'=> PDO::PARAM_STR
+    ],
+    [
+      'nom'=>'codePostal',
+      'PDO'=> PDO::PARAM_INT
+    ],
+    [
+      'nom'=>'ville',
+      'PDO'=> PDO::PARAM_STR
+    ],
   ];
 
-  public function __construct(){
-    $this->connectDB();
-    $this->valuesPDO();
-  }
-
   public function read(int $id){
-    $values=parent::read($id);
+    $values=$this->readWhereValue($id,'id');
     return new Entreprise($values);
   }
 
   public function readAll(){
     $values=parent::readAll();
-    $tableau=[];
-    foreach ($values as $value) {
-      $tableau[]= new Entreprise($value);
+    if ($values) {
+      $tableau=[];
+      foreach ($values as $value) {
+        $tableau[]= new Entreprise($value);
+      }
+      return $tableau;
     }
-    return $tableau;
-  }
-
-  protected function bindId($req,$id){
-    $req->bindValue($this->valuesPDO[$this->champs[0]],$id,PDO::PARAM_INT);
-  }
-
-  protected function bindvaluesPDO($req,$entreprise){
-    $req->bindValue($this->valuesPDO[$this->champs[1]],$entreprise->getRaisonSociale(),PDO::PARAM_STR);
-    $req->bindValue($this->valuesPDO[$this->champs[2]],$entreprise->getAdresse(),PDO::PARAM_STR);
-    $req->bindValue($this->valuesPDO[$this->champs[3]],$entreprise->getCodePostal(),PDO::PARAM_INT);
-    $req->bindValue($this->valuesPDO[$this->champs[4]],$entreprise->getVille(),PDO::PARAM_STR);
   }
 }
