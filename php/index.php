@@ -5,6 +5,7 @@ require_once ('functions.php');
 
 $entrepriseManager = new EntrepriseManager();
 $en=new UserManager();
+$e=new ClientManager();
 $ent= new Entreprise;
 $ent->setRaisonSociale('sugar');
 $ent->setAdresse('999 place daddy');

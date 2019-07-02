@@ -12,9 +12,9 @@ class ClientManager extends PersonneManager {
         'PDO'=>PDO::PARAM_INT
       ],
       [
-        'nom'=>'fonction'
+        'nom'=>'fonction',
         'PDO'=>PDO::PARAM_STR
-      ],
+      ]
     ];
     parent::__construct();
   }
@@ -35,6 +35,37 @@ class ClientManager extends PersonneManager {
     $values=$this->readWhereValue($id,'id');
     if ($values) {
       return new Trajet($values);
+    }
+  }
+
+  public function update($client){
+    $email=$client->getEmail();
+    $user;
+    if ($email) {
+      $user=$this->readWhereEmail($email);
+    }
+    if ($user) {
+      $id=$user['id'];
+      if ($id=$client->getId()) {
+        parent::update($client);
+      } else {
+        $this->updateDataClient(PortefeuilleManager,$client,$id);
+        $this->updateDataClient(RencontreManager,$client,$id);
+        $this->delete($client);
+        $client->setId($id);  //ENORME FAILLE DE SECURITE A REVOIR
+        parent::update($client);
+      }
+    } else {
+      parent::update($client);
+    }
+  }
+
+  private function updateDataClient(Manager $Manager,Client $oldClient,int $newId){
+    $manData=new $Manager();
+    $data=$manData->readWhereFkClient($oldClient);
+    foreach ($data as $value) {
+      $value->setFkClient($newId);
+      $manData->update($value);
     }
   }
 }
