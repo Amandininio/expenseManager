@@ -40,10 +40,16 @@ class Mission extends Entity {
   public function setStatut(string $statut){
     if (in_array($statut,$statutPossible)) {
       $this->statut=$statut;
+    } else {
+      $this->statut=$statutPossible[0];
     }
   }
 
   public function setFkCommercial(int $fkCommercial){
-    $this->fkCommercial=$fkCommercial;
+    $manUser=new UserManager();
+    $User=$manUser->read($fkCommercial);
+    if ($user && ($user->getType()=='commercial'))) {
+      $this->fkCommercial=$fkCommercial;
+    }
   }
 }
