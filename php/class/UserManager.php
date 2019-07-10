@@ -19,7 +19,7 @@ class UserManager extends PersonneManager {
   }
 
   public function create($user){
-    $client=parent::readWhereEmail($user->getEmail());
+    $client=$this->readWhereEmail($user->getEmail());
     if ($client==null) {
       parent::create($user);
     } else {
@@ -31,14 +31,14 @@ class UserManager extends PersonneManager {
   }
 
   public function read(int $id){
-    $values=$this->readWhereValue($id);
+    $values=$this->readWhereValue($id, 'id');
     if ($values) {
       return new user($values);
     }
   }
 
   public function readWhereEmail($email){
-    $values=parent::readWhereEmail($email,'email');
+    $values=parent::readWhereEmail($email);
     if ($values){
       return new User($values);
     }

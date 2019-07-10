@@ -30,7 +30,7 @@ class Personne extends Entity {
   }
 
   public function setPrenom(string $prenom){
-    if (preg_match('/^(\w|\s)*$/',$email)){
+    if (preg_match('/^(\w|\s)*$/',$prenom)){
       $this->prenom = ucfirst(strtolower($prenom));
     }
   }

@@ -5,8 +5,8 @@
  */
 class Mission extends Entity {
 
-  private $nom,$commentaire,$statut,$fkCommercial;
-  private $statutPossible[
+  private $nom,$statut,$fkCommercial;
+  private $statutPossible=[
     'brouillon',
     'envoyé',
     'en cours de traitement',
@@ -15,10 +15,6 @@ class Mission extends Entity {
 
   public function getNom(){
     return $this->nom;
-  }
-
-  public function getCommentaire(){
-    return $this->commentaire;
   }
 
   public function getStatut(){
@@ -33,22 +29,19 @@ class Mission extends Entity {
     $this->nom=$nom;
   }
 
-  public function setCommentaire(string $commentaire){
-    $this->commentaire=$commentaire;
-  }
-
   public function setStatut(string $statut){
-    if (in_array($statut,$statutPossible)) {
+    if (in_array($statut,$this->statutPossible)) {
       $this->statut=$statut;
     } else {
-      $this->statut=$statutPossible[0];
+      $this->statut=$this->statutPossible[0];
     }
   }
 
   public function setFkCommercial(int $fkCommercial){
     $manUser=new UserManager();
-    $User=$manUser->read($fkCommercial);
-    if ($user && ($user->getType()=='commercial'))) {
+    $user=$manUser->read($fkCommercial);
+    var_dump($user);
+    if ($user && ($user->getType()=='commercial')) {
       $this->fkCommercial=$fkCommercial;
     }
   }
