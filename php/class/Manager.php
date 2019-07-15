@@ -18,10 +18,10 @@ abstract class Manager {
   public function create(Entity $entity){
 
     $champs=$this->strWithoutIdChamps();
-    $nomsChamps=$champs['noms'];
+    $noms=$champs['noms'];
     $values=$champs['values'];
 
-    $sql = 'INSERT INTO '.$this->table." ($nomsChamps) VALUES ($values)";
+    $sql = 'INSERT INTO '.$this->table." ($noms) VALUES ($values)";
     var_dump($sql);
     $req=$this->db->prepare($sql);
     $this->bindvaluesPDO($req,$entity);
