@@ -5,17 +5,21 @@
 class UserManager extends PersonneManager {
 
   function __construct(){
-    $this->champs+=[
+    $this->champs=array_merge(
+      $this->champs,
       [
-        'nom'=>'type',
-        'PDO'=>PDO::PARAM_INT
-      ],
-      [
-        'nom'=>'mdp',
-        'PDO'=>PDO::PARAM_STR
+        [
+          'nom'=>'type',
+          'PDO'=>PDO::PARAM_STR
+        ],
+        [
+          'nom'=>'mdp',
+          'PDO'=>PDO::PARAM_STR
+        ]
       ]
-    ];
+    );
     parent::__construct();
+    var_dump($this->champs);
   }
 
   public function create($user){

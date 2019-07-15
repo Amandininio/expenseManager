@@ -12,7 +12,7 @@ class User extends Personne {
   ];
 
   public function getMdp(){
-    return $this->$mdp;
+    return $this->mdp;
   }
 
   public function getType(){
@@ -26,8 +26,6 @@ class User extends Personne {
   public function setType(string $type){
     if (in_array($type,$this->typePossible)) {
       $this->type=$type;
-    } else {
-      $this->type=$this->typePossible[0];
     }
   }
 

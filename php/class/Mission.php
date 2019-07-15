@@ -37,12 +37,22 @@ class Mission extends Entity {
     }
   }
 
-  public function setFkCommercial(int $fkCommercial){
+  protected function setFkCommercial(int $fkCommercial){
+    $this->fkCommercial=$fkCommercial;
+  }
+
+  public function getCommercial(){
     $manUser=new UserManager();
-    $user=$manUser->read($fkCommercial);
-    var_dump($user);
-    if ($user && ($user->getType()=='commercial')) {
-      $this->fkCommercial=$fkCommercial;
+    $commercial=$manUser->read($this->fkCommercial);
+    if ($commercial && ($commercial->getType()=='commercial')) {
+      return $commercial;
+    }
+  }
+
+  public function setCommercial(user $commercial){
+    if ($commercial->getType()=='commercial') {
+      $fk=$commercial->getId();
+      $this->setFkCommercial($fk);
     }
   }
 }
