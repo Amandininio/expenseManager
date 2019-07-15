@@ -12,17 +12,17 @@ abstract class Manager {
   protected $db, $table, $champs;
 
   public function __construct(){
-    $this->db=new PDO($this->dbInfo,$this->dbUser,$this->dbMdp,$this->dbOption);
+    $this->db = new PDO($this->dbInfo,$this->dbUser,$this->dbMdp,$this->dbOption);
   }
 
   public function create(Entity $entity){
 
     $champs=$this->strWithoutIdChamps();
-    $nomsChamps=$champs['noms'];
-    $valuesPDO=$champs['PDO'];
+    $noms=$champs['noms'];
+    $values=$champs['values'];
 
-    $sql = 'INSERT INTO '.$this->table." ($nomsChamps) VALUES ($valuesPDO)";
-
+    $sql = 'INSERT INTO '.$this->table." ($noms) VALUES ($values)";
+    var_dump($sql);
     $req=$this->db->prepare($sql);
     $this->bindvaluesPDO($req,$entity);
     $req->execute();
@@ -82,11 +82,11 @@ abstract class Manager {
     $values=[];
     foreach ($champs as $champ) {
       $noms[]=$champ['nom'];
-      $values[]=$champ['PDO'];
+      $values[]=':'.$champ['nom'];
     }
     return [
       'noms' => implode(',',$noms),
-      'PDO' => implode(',',$values)
+      'values' => implode(',',$values)
     ];
   }
 

@@ -6,20 +6,23 @@
 class TrajetManager extends NdfManager {
 
   function __construct() {
-    $this->champs+=[
+    $this->champs=array_merge(
+      $this->champs,
       [
-        'nom'=>'distance',
-        'PDO'=>PDO::PARAM_INT
-      ],
-      [
-        'nom'=>'depTrajet',
-        'PDO'=>PDO::PARAM_STR
-      ],
-      [
-        'nom'=>'arrTrajet',
-        'PDO'=>PDO::PARAM_STR
+        [
+          'nom'=>'distance',
+          'PDO'=>PDO::PARAM_INT
+        ],
+        [
+          'nom'=>'depTrajet',
+          'PDO'=>PDO::PARAM_STR
+        ],
+        [
+          'nom'=>'arrTrajet',
+          'PDO'=>PDO::PARAM_STR
+        ]
       ]
-    ];
+    );
     parent::__construct();
   }
 

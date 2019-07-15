@@ -17,10 +17,6 @@ class MissionManager extends Manager
       'PDO'=>PDO::PARAM_STR
     ],
     [
-      'nom'=>'commentaire',
-      'PDO'=>PDO::PARAM_STR
-    ],
-    [
       'nom'=>'statut',
       'PDO'=>PDO::PARAM_STR
     ],
@@ -31,7 +27,7 @@ class MissionManager extends Manager
   ];
 
   public function read(int $id){
-    $values=$this->read($id,'id');
+    $values=parent::readWhereValue($id,'id');
     if ($values) {
       return new Mission($values);
     }

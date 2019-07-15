@@ -1,6 +1,15 @@
 <?php
 
 abstract class Entity {
+
+  protected $id;
+
+  function __construct($values=null){
+    if($values){
+      $this->hydrate($values);
+    }
+  }
+
   protected function hydrate(array $values){
     foreach ($values as $key => $value){
         $methodName = 'set'.ucfirst($key);
@@ -10,4 +19,11 @@ abstract class Entity {
     }
   }
 
+  public function getId(){
+    return $this->id;
+  }
+
+  public function setId(int $id){
+    $this->id=$id;
+  }
 }

@@ -6,16 +6,19 @@
 class ClientManager extends PersonneManager {
 
   public function __construct(){
-    $this->champs+=[
+    $this->champs=array_merge(
+      $this->champs,
       [
-        'nom'=>'fkEntreprise',
-        'PDO'=>PDO::PARAM_INT
-      ],
-      [
-        'nom'=>'fonction',
-        'PDO'=>PDO::PARAM_STR
+        [
+          'nom'=>'fkEntreprise',
+          'PDO'=>PDO::PARAM_INT
+        ],
+        [
+          'nom'=>'fonction',
+          'PDO'=>PDO::PARAM_STR
+        ]
       ]
-    ];
+    );
     parent::__construct();
   }
 

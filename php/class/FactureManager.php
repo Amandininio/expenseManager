@@ -6,16 +6,19 @@
 class FactureManager extends NdfManager {
 
   function __construct(){
-    $this->champs+=[
+    $this->champs=array_merge(
+      $this->champs,
       [
-        'nom'=>'photo',
-        'PDO'=>PDO::PARAM_LOB
-      ],
-      [
-        'nom'=>'montant',
-        'PDO'=>PDO::PARAM_INT
+        [
+          'nom'=>'photo',
+          'PDO'=>PDO::PARAM_LOB
+        ],
+        [
+          'nom'=>'montant',
+          'PDO'=>PDO::PARAM_INT
+        ]
       ]
-    ];
+    );
     parent::__construct();
   }
 

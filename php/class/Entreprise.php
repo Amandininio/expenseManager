@@ -5,17 +5,7 @@
  */
 class Entreprise extends Entity {
 
-  private $id,$siret,$raisonSociale,$adresse,$codePostal,$ville;
-
-  function __construct($values=null){
-    if($values){
-      $this->hydrate($values);
-    }
-  }
-
-  public function getId(){
-    return $this->id;
-  }
+  private $siret,$raisonSociale,$adresse,$codePostal,$ville;
 
   public function getSiret(){
     return $this->siret;
@@ -37,27 +27,27 @@ class Entreprise extends Entity {
     return $this->ville;
   }
 
-  public function setId($id){
-    $this->id=$id;
-  }
-
   public function setSiret($siret){
-    $this->siret=$siret;
+    if (preg_match('/^\d{3}\s\d{3}\s\d{3}\s\d{5}$/',$siret)){
+      $this->siret=$siret;
+    }
   }
 
-  public function setRaisonSociale($raisonSociale){
+  public function setRaisonSociale(string $raisonSociale){
     $this->raisonSociale=$raisonSociale;
   }
 
-  public function setAdresse($adresse){
+  public function setAdresse(string $adresse){
     $this->adresse=$adresse;
   }
 
-  public function setCodePostal($codePostal){
-    $this->codePostal=$codePostal;
+  public function setCodePostal(int $codePostal){
+    if (preg_match('/^\d{5}$/',$codePostal)){
+      $this->codePostal=$codePostal;
+    }
   }
 
-  public function setVille($ville){
+  public function setVille(string $ville){
     $this->ville=$ville;
   }
 }

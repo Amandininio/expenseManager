@@ -21,7 +21,7 @@ abstract class PersonneManager extends Manager {
     ],
     [
       'nom'=>'telephone',
-      'PDO'=>PDO::PARAM_INT
+      'PDO'=>PDO::PARAM_STR
     ],
     [
       'nom'=>'email',
