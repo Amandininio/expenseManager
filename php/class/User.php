@@ -3,13 +3,9 @@
 /**
  *
  */
-class User extends Personne {
+abstract class User extends Personne {
 
-  private $mdp,$type;
-  private $typePossible=[
-    'commercial',
-    'comptable'
-  ];
+  protected $mdp,$type;
 
   public function getMdp(){
     return $this->mdp;
@@ -23,10 +19,7 @@ class User extends Personne {
     $this->mdp=$mdp;
   }
 
-  public function setType(string $type){
-    if (in_array($type,$this->typePossible)) {
-      $this->type=$type;
-    }
+  protected function setType(string $type){
+    $this->type=$type;
   }
-
 }

@@ -37,9 +37,9 @@ abstract class NdfManager extends Manager
     ]
   ];
 
-  public static function readWhereFkMission($Mission){
+  public static function readWhereFkMission(Mission $Mission){
     parent::__construct();
-    $values=parent::readWhereValue($Mission->getId(), 'fkMission');
+    $values=$this->readWhereValue($Mission->getId(), 'fkMission');
     if ($values) {
       $tableau=[];
       foreach ($values as $value) {

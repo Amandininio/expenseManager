@@ -49,10 +49,8 @@ class Mission extends Entity {
     }
   }
 
-  public function setCommercial(user $commercial){
-    if ($commercial->getType()=='commercial') {
-      $fk=$commercial->getId();
-      $this->setFkCommercial($fk);
-    }
+  public function setCommercial(Commercial $commercial){
+    $fk=$commercial->getId();
+    $this->setFkCommercial($fk);
   }
 }

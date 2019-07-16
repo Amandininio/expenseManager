@@ -25,12 +25,12 @@ class PortefeuilleManager extends Manager {
     return $this->readWhereFk($ndf,'fkNoteDeFrais')
   }
 
-  public function readWhereFkClient($client){
+  public function readWhereFkClient(Client $client){
     return $this->readWhereFk($client,'fkClient')
   }
 
-  public function readWhereFk($personne,$fk){
-    $values=$this->readWhereValue($personne->getId(),$fk);
+  public function readWhereFk($element,$fk){
+    $values=$this->readWhereValue($element->getId(),$fk);
     if ($values) {
       $tableau=[];
       foreach ($values as $value) {

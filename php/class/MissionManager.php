@@ -40,7 +40,7 @@ class MissionManager extends Manager
     }
   }
 
-  public function readWhereFkCommercial($Commercial){
+  public function readWhereFkCommercial(Commercial $Commercial){
     $values=$this->readWhereValue($Commercial->getId(), 'fkCommercial');
     if ($values) {
       return $this->buildTableau($values);

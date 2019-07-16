@@ -21,16 +21,8 @@ class PortefeuilleManager extends Manager {
     ]
   ];
 
-  public function readWhereFkCommercial($commercial){
-    return $this->readWhereFk($commercial,'fkCommercial')
-  }
-
-  public function readWhereFkClient($client){
-    return $this->readWhereFk($client,'fkClient')
-  }
-
-  public function readWhereFk($personne,$fk){
-    $values=$this->readWhereValue($personne->getId(),$fk);
+  public function readWhereFkCommercial(Commercial $commercial){
+    $values=$this->readWhereValue($commercial,'fkCommercial');
     if ($values) {
       $tableau=[];
       foreach ($values as $value) {
