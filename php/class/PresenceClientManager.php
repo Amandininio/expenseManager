@@ -3,7 +3,7 @@
 /**
  *
  */
-class PortefeuilleManager extends Manager {
+class PresenceClientManager extends Manager {
 
   protected $table='portefeuille';
   protected $champs=[
@@ -21,7 +21,7 @@ class PortefeuilleManager extends Manager {
     ]
   ];
 
-  public function readWhereFkNoteDeFrais($ndf){
+  public function readWhereFkNoteDeFrais(NoteDeFrais $ndf){
     return $this->readWhereFk($ndf,'fkNoteDeFrais')
   }
 

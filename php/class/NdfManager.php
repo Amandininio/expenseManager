@@ -5,7 +5,7 @@
  */
 abstract class NdfManager extends Manager
 {
-  protected $table='noteDeFrais';
+  protected $table='notedefrais';
   protected $champs=[
     [
       'nom'=>'id',
