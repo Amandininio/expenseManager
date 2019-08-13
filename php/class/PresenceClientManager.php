@@ -5,7 +5,7 @@
  */
 class PresenceClientManager extends Manager {
 
-  protected $table='portefeuille';
+  protected $table='presenceclient';
   protected $champs=[
     [
       'nom'=>'id',

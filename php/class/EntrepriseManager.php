@@ -1,12 +1,23 @@
 <?php
 
 /**
+ * Classe EntrepriseManager
  *
+ * Possède les propriétés et méthodes de la classe Manager
  */
-class EntrepriseManager extends Manager
-{
-
+class EntrepriseManager extends Manager {
+  /**
+   * Propriété protected string : table
+   *
+   * Nom de la table dans la base de données
+   */
   protected $table='entreprise';
+
+  /**
+   * Proriété protected array<array<string,integer>> : $champs
+   *
+   * Nom des champs dans la base de données. Ainsi que leur type
+   */
   protected $champs=[
     [
       'nom'=>'id',
@@ -34,11 +45,31 @@ class EntrepriseManager extends Manager
     ],
   ];
 
+  /**
+   * fonction public : read
+   *
+   * lecture d'une Entreprise
+   *
+   * @param integer id d'une Entreprise.
+   *
+   * @return Entreprise objet possédant toutes les informations d'une Entreprise.
+   */
   public function read(int $id){
+
+    //fonction readWhereValue de Manager
     $values=$this->readWhereValue($id,'id');
     return new Entreprise($values);
   }
 
+  /**
+   * fonction public : readAll
+   *
+   * Redéfinition de la fonctionn readAll du Manager pour la lecture de toutes les entreprises.
+   *
+   * @param void.
+   *
+   * @return array<Entreprise> objet possédant toutes les informations d'une Entreprise.
+   */
   public function readAll(){
     $values=parent::readAll();
     if ($values) {

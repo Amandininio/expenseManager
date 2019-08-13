@@ -1,7 +1,9 @@
 <?php
 
 /**
+ * Classe Entreprise
  *
+ * Possède les propriétés et les méthodes de la classe Entity
  */
 class Entreprise extends Entity {
 

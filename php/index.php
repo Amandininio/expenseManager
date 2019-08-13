@@ -3,19 +3,25 @@
 require_once ('functions.php');
 
 
-$entrepriseManager = new EntrepriseManager();
-$en=new UserManager();
-$e=new ClientManager();
-$ent= new Entreprise;
-$ent->setRaisonSociale('sugar');
-$ent->setAdresse('999 place daddy');
-$ent->setCodePostal('56320');
-$ent->setVille('candyland');
-$ent->setSiret('464 636 426 9569');
-$ent->setId(11);
-var_dump($entrepriseManager->read(2));
-echo 'ok';
-$entrepriseManager->update($ent);
-var_dump($entrepriseManager->readAll());
+$dataManager = new UserManager();
+$Manager = new UserManager();
 
-// var_dump($ent);
+$data= new Commercial;
+$data->setNom('poneys');
+$data->setPrenom('walker');
+$data->setEmail('renarda@polochon.com');
+$data->setId(13);
+var_dump([0,1,3]+[1,1]);
+
+var_dump($dataManager->read(1));
+echo 'donut/';
+// $dataManager->create($data);
+echo 'tanga/';
+$dataManager->update($data);
+echo 'licorne/';
+// $dataManager->delete($data);
+echo'culotte/';
+var_dump($dataManager->readAll());
+
+
+// var_dump($data);
