@@ -1,6 +1,6 @@
 <?php
 
-$db = new PDO('mysql:host=localhost;dbname=expense_manager;charset=utf8','root','');
+$db = new PDO('mysql:host=localhost;dbname=expensemanager;charset=utf8','root','');
 
 
 function readVehicules($db){

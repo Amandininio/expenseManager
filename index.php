@@ -151,14 +151,7 @@ foreach ($vehicules as $vehicule){
 
 <!-------------------------Frais de déplacement---------------------------------------------->
 <div>
-  <div class="input-group mb-2">
-      <select class="custom-select">
-                  <option selected>selectionner le type de frais</option>
-                  <option value="1">Déplacement</option>
-                  <option value="2">Repas</option>
-                  <option value="3">Invitation & cadeaux commerciale</option>
-      </select><br>
-
+  <div class="grid-group mb-12">
       <input type="text" class="form-control" placeholder="Notes de frais & déplacements">
   </div>
 </div>
