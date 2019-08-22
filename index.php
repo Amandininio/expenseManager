@@ -1,3 +1,25 @@
+<?php
+require_once ('model.php');
+require_once ('functions.php');
+
+$vehicules = readVehicules($db);
+
+// Adapte les données pour l'affichage
+$vehiculesAdapte = [];
+foreach ($vehicules as $vehicule){
+    $vehiculesAdapte[] = [
+        'Supprimer' => '<input type="checkbox" name="supprimer[]" value="'.$vehicule['Immatriculation'].'"/>',
+        'Immatriculation' => '<a href="create.php?id='.$vehicule['Immatriculation'].'" > '.$vehicule['Immatriculation'].'
+        </a>',
+        'Immatriculation' => $vehicule['Immatriculation'],
+        'Marque' => $vehicule['Marque'],
+        'Modele' => $vehicule['Modele'],
+        'Couleur' => $vehicule['Couleur'],
+    ];
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,34 +34,17 @@
     <title>Expense Manager</title>
   </head>
   <body>
-      <!------------------Heure & Date--------------------------------------->
-
-<script>var aujourdhui = new Date(); 
-        var annee = aujourdhui.getFullYear(); // retourne le millésime
-        var mois =aujourdhui.getMonth()+1; // date.getMonth retourne un entier entre 0 et 11 donc il faut ajouter 1
-        var jour = aujourdhui.getDate(); // retourne le jour (1à 31)
-        var joursemaine = aujourdhui.getDay() ; // retourne un entier compris entre 0 et 6 (0 pour dimanche)
-        var tab_jour=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
-        document.write('Nous sommes le : ' +  tab_jour[joursemaine] + ' ' + jour + '/' + mois + '/' + annee) ;
-</script>
-
-<script type="text/javascript">
-        var ladate=new Date()
-        document.write("Heure brute : ");
-        document.write(ladate.getHours()+":"+ladate.getMinutes()+":"+ladate.getSeconds())
-        document.write("<BR>");
-        var h=ladate.getHours();
-        if (h<10) {h = "0" + h}
-        var m=ladate.getMinutes();
-        if (m<10) {m = "0" + m}
-        var s=ladate.getSeconds();
-        if (s<10) {s = "0" + s}
-        document.write("Heure formatée : ");
-        document.write(h+":"+m+":"+s)
-</script>
+     
+ 
 <!------------------Heure & Date---------------------------------------->
 <p id="logo"> <img src="img/index.png" alt="" > </p>
     <h1>Gestion de mission</h1>
+    <div class="container mb-">
+      <input type="email" name="email" id="email" class="form-control" placeholder="Login"><br>
+      <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Mot de passe"><br>
+      <button type="submit" class="btn-primary">Connection</button>
+      
+    </div>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Acceuil</a>
@@ -58,6 +63,9 @@
             <li class="nav-item">
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Clients</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link " href="#" tabindex="-1">Login</a>
+            </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
@@ -71,10 +79,10 @@
 
 <!-----------------------Contenu----------------------------------------->
 
-<form id="formulaire">
-        <div class="container">
+<form id="formulaire" class="mb-12">
+        <div class="mb-12">
           <div class="col-7">
-          <h2 id="titreFormulaire">Formulaire du client</h2>
+          <h2 class="mb-12">Formulaire du client</h2>
             <input type="text" class="form-control" placeholder="Prénom">
           </div>
           <div class="col-7">
@@ -91,6 +99,38 @@
                   <input type="text" class="form-control" placeholder="Numéro de téléphone">
                 </div>
               </div>
+
+<!------------------Heure & Date--------------------------------------->
+<div class="row">
+<!--<script>
+        var aujourdhui = new Date(); 
+        var annee = aujourdhui.getFullYear(); // retourne le millésime
+        var mois =aujourdhui.getMonth()+1; // date.getMonth retourne un entier entre 0 et 11 donc il faut ajouter 1
+        var jour = aujourdhui.getDate(); // retourne le jour (1à 31)
+        var joursemaine = aujourdhui.getDay() ; // retourne un entier compris entre 0 et 6 (0 pour dimanche)
+        var tab_jour=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+        document.write('Nous sommes le : ' +  tab_jour[joursemaine] + ' ' + jour + '/' + mois + '/' + annee) ;
+</script><br>
+<script type="text/javascript">
+        var ladate=new Date()
+        document.write("Heure Locale Fr : ");
+        document.write(ladate.getHours()+":"+ladate.getMinutes()+":"+ladate.getSeconds())
+        document.write("<BR>");
+        var h=ladate.getHours();
+        if (h<10) {h = "0" + h}
+        var m=ladate.getMinutes();
+        if (m<10) {m = "0" + m}
+        var s=ladate.getSeconds();
+        if (s<10) {s = "0" + s}
+</script><br>-->
+
+<!-------------Tableau Récap de la réservation voitures ---------------------------------------------------------->
+<form action="listerResa.php" method="" class="mb-10 xs-4">
+  <?php echo afficheTableau($vehiculesAdapte) ?><br>
+    <input type="submit" name="btnAfficherListe" value="Réservations" id="boutton" class="primary"/>
+</form>
+</div>
+
           <div><br><br>
               <label for="">Commercial </label>
               <select name="" id="liste">
@@ -101,7 +141,8 @@
               </select>
              <label for="">Date de rendez-vous  <input type="date" name="date" id="date"></label><br>
               <textarea name="" id="" cols="30" rows="10" placeholder="Commenter la situation avec le client"></textarea>
-
+              
+              
           </div>
         </div>
 
@@ -109,32 +150,35 @@
 
 
 <!-------------------------Frais de déplacement---------------------------------------------->
-<div class="input-group">
-    <select class="custom-select">
-                <option selected>selectionner le type de frais</option>
-                <option value="1">Déplacement</option>
-                <option value="2">Repas</option>
-                <option value="3">Invitation & cadeaux commerciale</option>
-    </select>
-    <input type="text" class="form-control" placeholder="Inscrivez vos notes de frais  & de déplacement ici"><br>
-        <div class="input-group-append">
-          <span class="input-group-text">€</span><br>
-          <span class="input-group-text">0.00</span>
-        </div>
-        </div>
+<div>
+  <div class="input-group mb-2">
+      <select class="custom-select">
+                  <option selected>selectionner le type de frais</option>
+                  <option value="1">Déplacement</option>
+                  <option value="2">Repas</option>
+                  <option value="3">Invitation & cadeaux commerciale</option>
+      </select><br>
+
+      <input type="text" class="form-control" placeholder="Notes de frais & déplacements">
+  </div>
+</div>
+
+<h2>Notez toutes vos charges ici !!</h2>
+
+
 <!-----------------------Choix du fichier a télécharger-------------------------------------------------------->
       <div class="input-group mb-3" id= "rechercheDoc">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroupFileAddon01">Charger votre fichier</span>
             </div>
+            
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
               <label class="custom-file-label" for="inputGroupFile01">Importer </label>
             </div>
-          </div>
 <!-----------------------Choix du fichier a télécharger-------------------------------------------------------->
-
         <button type="button" class="btn btn-success">Envoyer</button>
+      </div>
 </form>
 <!-------------------------Frais de déplacement---------------------------------------------->
 
@@ -174,12 +218,7 @@
         </tbody>
       </table>
 
-
-
-
-
-
-
+      
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

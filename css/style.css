@@ -1,4 +1,6 @@
-
+.selector-for-some-widget{
+    box-sizing: content-box;
+}
 h1{ position: relative;
     margin: 23px;
     text-align: center;
@@ -14,6 +16,7 @@ h4{
 }
 #titreFormulaire{
     padding: 25px;
+    border-color: brown;
 }
 
 #logo{
