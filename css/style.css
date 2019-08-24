@@ -8,7 +8,6 @@ h1 { position: relative;
 
 h2{
     text-align: center;
-    margin-left: 210px;
 }
 
 h4{
@@ -24,10 +23,11 @@ h4{
     border-color: brown;
 }
 
-#logo{
-    margin: 0px;
+.logo{
+    margin-left: 0px;
     position: relative;
-    height: 15%;
+    height: 1%;
+    width: 10%;
 }
 
 #rechercheDoc{
@@ -37,7 +37,6 @@ h4{
 }
 
 #formulaire {
-        margin-left: 21px;
-        padding-left: 21px;
+       text-align: center;
         width: 100%;
 }

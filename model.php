@@ -11,9 +11,10 @@ function readVehicules($db){
 
 function readVehicule($db,$id)
 {
+    
     $sql = "SELECT * FROM vehicules WHERE id = :id";
+    $id = id;
     $req = $db->prepare($sql);
-    $req->bindValue('id', $id, PDO::PARAM_INT);
     $req->execute();
     return $req->fetch();
 }

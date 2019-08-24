@@ -36,8 +36,8 @@ foreach ($vehicules as $vehicule){
   <body>
      
  
-<!------------------Heure & Date---------------------------------------->
-<p id="logo"> <img src="img/logo1.jfif" alt="" > </p>
+<!-----------------Logo---------------------------------------->
+<p class="logo"> <img src="img/logo1.jfif" alt="" class="logo"> </p>
     <h1>Gestion de mission</h1>
     <div class="container mb-">
       <input type="email" name="email" id="email" class="form-control" placeholder="Login"><br>
@@ -77,9 +77,8 @@ foreach ($vehicules as $vehicule){
 <!------------------------Menu--------------------------------------->
 
 
-<!-----------------------Contenu----------------------------------------->
-
-<form id="formulaire" >
+<!-----------------------Contenu Formulaire----------------------------------------->
+<form id="formulaire" class="container mb-12">
         <div class="mb-12">
           <div class="col-7">
           <h2 class="mb-12">Formulaire du client</h2>
@@ -102,34 +101,34 @@ foreach ($vehicules as $vehicule){
 
 <!------------------Heure & Date--------------------------------------->
 <div class="row">
-<script>
-        var aujourdhui = new Date(); 
-        var annee = aujourdhui.getFullYear(); // retourne le millésime
-        var mois =aujourdhui.getMonth()+1; // date.getMonth retourne un entier entre 0 et 11 donc il faut ajouter 1
-        var jour = aujourdhui.getDate(); // retourne le jour (1à 31)
-        var joursemaine = aujourdhui.getDay() ; // retourne un entier compris entre 0 et 6 (0 pour dimanche)
-        var tab_jour=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
-        document.write('Nous sommes le : ' +  tab_jour[joursemaine] + ' ' + jour + '/' + mois + '/' + annee) ;
-</script><br>
-<script type="text/javascript">
-        var ladate=new Date()
-        document.write("Heure Locale Fr : ");
-        document.write(ladate.getHours()+":"+ladate.getMinutes()+":"+ladate.getSeconds())
-        document.write("<BR>");
-        var h=ladate.getHours();
-        if (h<10) {h = "0" + h}
-        var m=ladate.getMinutes();
-        if (m<10) {m = "0" + m}
-        var s=ladate.getSeconds();
-        if (s<10) {s = "0" + s}
-</script><br>
+      <script>
+              var aujourdhui = new Date(); 
+              var annee = aujourdhui.getFullYear(); // retourne le millésime
+              var mois =aujourdhui.getMonth()+1; // date.getMonth retourne un entier entre 0 et 11 donc il faut ajouter 1
+              var jour = aujourdhui.getDate(); // retourne le jour (1à 31)
+              var joursemaine = aujourdhui.getDay() ; // retourne un entier compris entre 0 et 6 (0 pour dimanche)
+              var tab_jour=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+              document.write('Nous sommes le : ' +  tab_jour[joursemaine] + ' ' + jour + '/' + mois + '/' + annee) ;
+      </script><br>
+      <script type="text/javascript">
+              var ladate=new Date()
+              document.write("Heure Locale Fr : ");
+              document.write(ladate.getHours()+":"+ladate.getMinutes()+":"+ladate.getSeconds())
+              document.write("<BR>");
+              var h=ladate.getHours();
+              if (h<10) {h = "0" + h}
+              var m=ladate.getMinutes();
+              if (m<10) {m = "0" + m}
+              var s=ladate.getSeconds();
+              if (s<10) {s = "0" + s}
+      </script><br>
 
 <!-------------Tableau Récap de la réservation voitures ---------------------------------------------------------->
 
-<form action="listerResa.php" method="post">
-        <?php echo afficheTableau($vehiculesAdapte)?><br>
-    <input type="submit" name="btnAfficherListe" value="Réservations" id="boutton" />
-</form>
+      <form action="listerResa.php" method="post">
+              <?php echo afficheTableau($vehiculesAdapte)?><br>
+          <input type="submit" name="btnAfficherListe" value="Réservations" id="boutton" />
+      </form>
 </fieldset>
  </div>
 </div>
@@ -141,12 +140,13 @@ foreach ($vehicules as $vehicule){
 <div>
   <h2 id="note">Notez toutes vos charges ici !!</h2>
   <div class="grid-group mb-12">
-      <input type="text" class="form-control" placeholder="Notes de frais & déplacements">
+      <textarea type="text" class="form-control" placeholder="Notes de frais & déplacements"></textarea>
   </div>
 </div>
 
 <!-----------------------Choix du fichier a télécharger-------------------------------------------------------->
-      <div class="input-group mb-3" id= "rechercheDoc">
+      <div class="container">
+        <div class="input-group mb-" id= "rechercheDoc">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroupFileAddon01">Charger votre fichier</span>
             </div>
@@ -158,11 +158,13 @@ foreach ($vehicules as $vehicule){
 <!-----------------------Choix du fichier a télécharger-------------------------------------------------------->
         <button type="button" class="btn btn-success">Envoyer</button>
       </div>
+    </div>
 </form>
 <!-------------------------Frais de déplacement---------------------------------------------->
 
 
 <!----------------------- Tableau Récapitulatif Portefeuil client---------------------------------------------------------------------->
+<div class="container">
 <h4 id="row">Tableau récapitulatif du portefeuille client</h4>
 <table class="table table-hover">
         <thead>
@@ -171,7 +173,6 @@ foreach ($vehicules as $vehicule){
             <th scope="col">Prenom</th>
             <th scope="col">Nom</th>
             <th scope="col">Email</th>
-            <th scope="col">Tel</th>
             <th scope="col">Addresse</th>
             <th scope="col">Frais</th>
           </tr>
@@ -196,6 +197,7 @@ foreach ($vehicules as $vehicule){
           </tr>
         </tbody>
       </table>
+    </div>
 
       
     <!-- Optional JavaScript -->
