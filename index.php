@@ -13,8 +13,8 @@ foreach ($vehicules as $vehicule){
         </a>',
         'Immatriculation' => $vehicule['Immatriculation'],
         'Marque' => $vehicule['Marque'],
-        'Modele' => $vehicule['Modele'],
-        'Couleur' => $vehicule['Couleur'],
+        /*'Modele' => $vehicule['Modele'],*/
+        'Couleur' => $vehicule['Couleur']
     ];
 }
 ?>
@@ -37,7 +37,7 @@ foreach ($vehicules as $vehicule){
      
  
 <!------------------Heure & Date---------------------------------------->
-<p id="logo"> <img src="img/index.png" alt="" > </p>
+<p id="logo"> <img src="img/logo1.jfif" alt="" > </p>
     <h1>Gestion de mission</h1>
     <div class="container mb-">
       <input type="email" name="email" id="email" class="form-control" placeholder="Login"><br>
@@ -55,13 +55,13 @@ foreach ($vehicules as $vehicule){
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Missions<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="create.php">Missions<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Statistiques</a>
+              <a class="nav-link" href="">Statistiques</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Clients</a>
+              <a class="nav-link disabled" href="#clients.php" tabindex="-1" aria-disabled="true">Clients</a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="#" tabindex="-1">Login</a>
@@ -79,7 +79,7 @@ foreach ($vehicules as $vehicule){
 
 <!-----------------------Contenu----------------------------------------->
 
-<form id="formulaire" class="mb-12">
+<form id="formulaire" >
         <div class="mb-12">
           <div class="col-7">
           <h2 class="mb-12">Formulaire du client</h2>
@@ -102,7 +102,7 @@ foreach ($vehicules as $vehicule){
 
 <!------------------Heure & Date--------------------------------------->
 <div class="row">
-<!--<script>
+<script>
         var aujourdhui = new Date(); 
         var annee = aujourdhui.getFullYear(); // retourne le millésime
         var mois =aujourdhui.getMonth()+1; // date.getMonth retourne un entier entre 0 et 11 donc il faut ajouter 1
@@ -122,42 +122,28 @@ foreach ($vehicules as $vehicule){
         if (m<10) {m = "0" + m}
         var s=ladate.getSeconds();
         if (s<10) {s = "0" + s}
-</script><br>-->
+</script><br>
 
 <!-------------Tableau Récap de la réservation voitures ---------------------------------------------------------->
-<form action="listerResa.php" method="" class="mb-10 xs-4">
-  <?php echo afficheTableau($vehiculesAdapte) ?><br>
-    <input type="submit" name="btnAfficherListe" value="Réservations" id="boutton" class="primary"/>
-</form>
-</div>
 
-          <div><br><br>
-              <label for="">Commercial </label>
-              <select name="" id="liste">
-                  <option value="">Michel Brun</option>
-                  <option value="">Pierce browsman</option>
-                  <option value="">Chuck Norris</option>
-                  <option value="">Jesus Christ</option>
-              </select>
-             <label for="">Date de rendez-vous  <input type="date" name="date" id="date"></label><br>
-              <textarea name="" id="" cols="30" rows="10" placeholder="Commenter la situation avec le client"></textarea>
-              
-              
-          </div>
-        </div>
+<form action="listerResa.php" method="post">
+        <?php echo afficheTableau($vehiculesAdapte)?><br>
+    <input type="submit" name="btnAfficherListe" value="Réservations" id="boutton" />
+</form>
+</fieldset>
+ </div>
+</div>
 
 <!-----------------------Contenu----------------------------------------->
 
 
 <!-------------------------Frais de déplacement---------------------------------------------->
 <div>
+  <h2 id="note">Notez toutes vos charges ici !!</h2>
   <div class="grid-group mb-12">
       <input type="text" class="form-control" placeholder="Notes de frais & déplacements">
   </div>
 </div>
-
-<h2>Notez toutes vos charges ici !!</h2>
-
 
 <!-----------------------Choix du fichier a télécharger-------------------------------------------------------->
       <div class="input-group mb-3" id= "rechercheDoc">

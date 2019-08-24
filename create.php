@@ -56,8 +56,8 @@ header('location:index.php');
 <p>Choix du collaborateur : </p>
 
 <form method="post" action="">
-    <?php echo afficheTableau($collaborateursAdapte)?>
-
+    <h3></h3>
+    <?php echo afficheTableau($collaborateursAdapte), readVehicule($db,$id)?>
     <p>Date de reservation : </p>
     <select name="jour"><?php echo selectOptionsNumeric(1,31,$dateResa[2])?></select>
     <select name="mois"><?php echo selectOptionsNumeric(1,12,$dateResa[1])?></select>

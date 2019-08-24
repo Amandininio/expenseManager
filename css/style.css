@@ -1,9 +1,14 @@
 .selector-for-some-widget{
     box-sizing: content-box;
 }
-h1{ position: relative;
+h1 { position: relative;
     margin: 23px;
     text-align: center;
+}
+
+h2{
+    text-align: center;
+    margin-left: 210px;
 }
 
 h4{
@@ -31,9 +36,8 @@ h4{
     justify-content: flex-start;
 }
 
-form{
-    border: solid 1px black;
-    text-align: center;
-    margin: 34px;
-    padding: 8px;
+#formulaire {
+        margin-left: 21px;
+        padding-left: 21px;
+        width: 100%;
 }
