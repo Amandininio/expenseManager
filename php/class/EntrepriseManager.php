@@ -72,7 +72,9 @@ class EntrepriseManager extends Manager {
    */
   public function readAll(){
     $values=parent::readAll();
-    if ($values) {
+    if (array_key_exists('id',$values)) {
+      return new Entreprise($values);
+    } else {
       $tableau=[];
       foreach ($values as $value) {
         $tableau[]= new Entreprise($value);

@@ -23,10 +23,12 @@ class PortefeuilleManager extends Manager {
 
   public function readWhereFkCommercial(Commercial $commercial){
     $values=$this->readWhereValue($commercial,'fkCommercial');
-    if ($values) {
+    if (array_key_exists('id',$values)) {
+      return new Portefeuille($values);
+    } else {
       $tableau=[];
       foreach ($values as $value) {
-        $tableau[]= new portefeuille($value);
+        $tableau[]= new Portefeuille($value);
       }
       return $tableau;
     }

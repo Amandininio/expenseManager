@@ -19,11 +19,10 @@ class UserManager extends PersonneManager {
       ]
     );
     parent::__construct();
-    var_dump($this->champs);
   }
 
   public function create($user){
-    $client=$this->readWhereEmail($user->getEmail());
+    $client=$this->readWhereEmail(Client,$user->getEmail());
     if ($client==null) {
       parent::create($user);
     } else {

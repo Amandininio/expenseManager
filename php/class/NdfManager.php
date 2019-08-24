@@ -40,7 +40,13 @@ abstract class NdfManager extends Manager
   public static function readWhereFkMission(Mission $Mission){
     parent::__construct();
     $values=$this->readWhereValue($Mission->getId(), 'fkMission');
-    if ($values) {
+    if (array_key_exists('id',$values)) {
+      if($values['raison']=='trajet'){
+        return new Trajet($values);
+      } else {
+        return new Facture($values);
+      }
+    } else {
       $tableau=[];
       foreach ($values as $value) {
         if($value['raison']=='trajet'){

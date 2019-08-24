@@ -31,10 +31,12 @@ class PresenceClientManager extends Manager {
 
   public function readWhereFk($element,$fk){
     $values=$this->readWhereValue($element->getId(),$fk);
-    if ($values) {
+    if (array_key_exists('id',$values)) {
+      return new NoteDeFrais($values);
+    } else {
       $tableau=[];
       foreach ($values as $value) {
-        $tableau[]= new noteDeFrais($value);
+        $tableau[]= new NoteDeFrais($value);
       }
       return $tableau;
     }

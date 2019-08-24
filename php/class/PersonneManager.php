@@ -30,6 +30,6 @@ abstract class PersonneManager extends Manager {
   ];
 
   public function readWhereEmail($email){
-    $values=$this->readWhereValue($email,'email');
+    return $this->readWhereValue($email,'email');
   }
 }
