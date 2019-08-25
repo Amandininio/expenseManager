@@ -173,7 +173,6 @@ foreach ($vehicules as $vehicule){
             <th scope="col">Prenom</th>
             <th scope="col">Nom</th>
             <th scope="col">Email</th>
-            <th scope="col">Addresse</th>
             <th scope="col">Frais</th>
           </tr>
         </thead>
