@@ -33,7 +33,7 @@ foreach ($vehicules as $vehicule){
 
     <title>Expense Manager</title>
   </head>
-  <body>
+  <body class="container mb-12">
      
  
 <!-----------------Logo---------------------------------------->
@@ -146,7 +146,7 @@ foreach ($vehicules as $vehicule){
 
 <!-----------------------Choix du fichier a télécharger-------------------------------------------------------->
       <div class="container">
-        <div class="input-group mb-" id= "rechercheDoc">
+        <div class="input-group mb-2" id= "rechercheDoc">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroupFileAddon01">Charger votre fichier</span>
             </div>
@@ -166,7 +166,7 @@ foreach ($vehicules as $vehicule){
 <!----------------------- Tableau Récapitulatif Portefeuil client---------------------------------------------------------------------->
 <div class="container">
 <h4 id="row">Tableau récapitulatif du portefeuille client</h4>
-<table class="table table-hover">
+<table class="table table-hover mb-12">
         <thead>
           <tr>
             <th scope="col">#</th>
