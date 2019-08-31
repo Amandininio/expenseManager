@@ -23,11 +23,11 @@ h4{
     border-color: brown;
 }
 
-.logo{
+#logo{
     margin-left: 0px;
     position: relative;
-    height: 1%;
-    width: 10%;
+    height: 50%;
+    width: 50%;
 }
 
 #rechercheDoc{

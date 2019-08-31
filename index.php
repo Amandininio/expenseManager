@@ -37,7 +37,7 @@ foreach ($vehicules as $vehicule){
      
  
 <!-----------------Logo---------------------------------------->
-<p class="logo"> <img src="img/logo1.jfif" alt="" class="logo"> </p>
+<p id="logo"> <img src="img/logo1.jfif" alt="" class="logo"> </p>
     <h1>Gestion de mission</h1>
     <div class="container mb-">
       <input type="email" name="email" id="email" class="form-control" placeholder="Login"><br>
