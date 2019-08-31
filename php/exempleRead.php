@@ -10,10 +10,9 @@ $userMan = new UserManager();
 $id=$_GET['id'];
 
 $user = $userMan->read($id);
-$results=$dataManager->readWhereFkCommercial($user);
+$results=$dataManager->readAll();
 // echo 'mission';
 // var_dump($results);
 
 // header('Content-Type:application/json');
-echo json_encode($results);
-echo json_last_error();
+var_dump($results);
