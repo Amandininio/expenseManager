@@ -21,20 +21,14 @@ class PortefeuilleManager extends Manager {
     ]
   ];
 
-  public function readWhereFkCommercial($commercial){
-    return $this->readWhereFk($commercial,'fkCommercial')
-  }
-
-  public function readWhereFkClient($client){
-    return $this->readWhereFk($client,'fkClient')
-  }
-
-  public function readWhereFk($personne,$fk){
-    $values=$this->readWhereValue($personne->getId(),$fk);
-    if ($values) {
+  public function readWhereFkCommercial(Commercial $commercial){
+    $values=$this->readWhereValue($commercial,'fkCommercial');
+    if (array_key_exists('id',$values)) {
+      return new Portefeuille($values);
+    } else {
       $tableau=[];
       foreach ($values as $value) {
-        $tableau[]= new portefeuille($value);
+        $tableau[]= new Portefeuille($value);
       }
       return $tableau;
     }

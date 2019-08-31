@@ -5,7 +5,7 @@
  */
 class Personne extends Entity {
 
-  private $nom,$prenom,$telephone,$email;
+  private $nom,$prenom,$telephone,$email,$fkEntreprise;
 
   public function getNom(){
     return $this->nom;
@@ -21,6 +21,10 @@ class Personne extends Entity {
 
   public function getEmail(){
     return $this->email;
+  }
+
+  public function getFkEntreprise(){
+    return $this->fkEntreprise;
   }
 
   public function setNom(string $nom){
@@ -45,5 +49,22 @@ class Personne extends Entity {
     if (preg_match('/^.+\@.+\..{2,3}$/',$email)){
       $this->email=$email;
     }
+  }
+
+  protected function setFkEntreprise(int $fk){
+    $this->fkEntreprise=$fk;
+  }
+
+  public function getEntreprise(){
+    $manEntreprise=new EntrepriseManager();
+    $entreprise=$manEntreprise->read($this->fkEntreprise);
+    if ($entreprise) {
+      return $entreprise;
+    }
+  }
+
+  public function setEntreprise(Entreprise $entreprise){
+    $fk=$entreprise->getId();
+    $this->setFkEntreprise($fk);
   }
 }

@@ -1,38 +1,42 @@
 <?php
 
 /**
+ * Classe Client
  *
+ * Possède les propriétés et les méthodes des classes Personne et Entity
  */
 class Client extends Personne {
 
-  private $fonction, $fkEntreprise;
+/**
+ * Propriété private string : fonction
+ *
+ * fonction du client dans son entreprise
+ */
+  private $fonction;
 
+/**
+ * fonction public : getFonction
+ *
+ * la fonction get de la propriété fonction
+ *
+ * @param void
+ *
+ * @return string fonction du client
+ */
   public function getFonction(){
     return $this->fonction;
   }
 
-  public function getFkEntreprise(){
-    return $this->fkEntreprise;
-  }
-
+/**
+ * fonction public : setFonction
+ *
+ * la fonction set de la propriété fonction
+ *
+ * @param string fonction du client
+ *
+ * @return void
+ */
   public function setFonction(string $fonction){
     $this->fonction=$fonction;
-  }
-
-  protected function setFkEntreprise(int $fk){
-    $this->fkEntreprise=$fk;
-  }
-
-  public function getEntreprise(){
-    $manUser=new EntrepriseManager();
-    $entreprise=$manUser->read($this->fkEntreprise);
-    if ($entreprise) {
-      return $entreprise;
-    }
-  }
-
-  public function setEntreprise(Entreprise $entreprise){
-    $fk=$entreprise->getId();
-    $this->setFkEntreprise($fk);
   }
 }

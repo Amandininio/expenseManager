@@ -19,11 +19,10 @@ class UserManager extends PersonneManager {
       ]
     );
     parent::__construct();
-    var_dump($this->champs);
   }
 
   public function create($user){
-    $client=$this->readWhereEmail($user->getEmail());
+    $client=$this->readWhereEmail(Client,$user->getEmail());
     if ($client==null) {
       parent::create($user);
     } else {
@@ -35,32 +34,44 @@ class UserManager extends PersonneManager {
   }
 
   public function read(int $id){
-    $values=$this->readWhereValue($id, 'id');
-    if ($values) {
-      return new user($values);
+    $value=$this->readWhereValue($id, 'id');
+    if ($value) {
+      if ($value['type']=='commercial'){
+        return new Commercial($value);
+      }
+      if ($value['type']=='comptable'){
+        return new comptable($value);
+      }
     }
   }
 
   public function readWhereEmail($email){
-    $values=parent::readWhereEmail($email);
-    if ($values){
-      return new User($values);
+    $value=parent::readWhereEmail($email);
+    if ($value){
+      if ($value['type']=='commercial'){
+        return new Commercial($value);
+      }
+      if ($value['type']=='comptable'){
+        return new comptable($value);
+      }
     }
   }
 
   public function delete($user){
-    $manPortefeuille=new PortefeuilleManager();
-    $portefeuilles=$manPortefeuille->readAllFkCommercial($user);
-    if ($portefeuilles) {
-      foreach ($portefeuilles as $portefeuille) {
-        $manPortefeuille->delete($portefeuille);
+    if ($user->getType()=='commercial'){
+      $manPortefeuille=new PortefeuilleManager();
+      $portefeuilles=$manPortefeuille->readAllFkCommercial($user);
+      if ($portefeuilles) {
+        foreach ($portefeuilles as $portefeuille) {
+          $manPortefeuille->delete($portefeuille);
+        }
       }
-    }
-    $manMission=new MissionManager();
-    $Missions=$manmission->readAllFkCommercial($user);
-    if ($Missions) {
-      foreach ($Missions as $mission){
-        $manMission->delete($mission);
+      $manMission=new MissionManager();
+      $Missions=$manmission->readAllFkCommercial($user);
+      if ($Missions) {
+        foreach ($Missions as $mission){
+          $manMission->delete($mission);
+        }
       }
     }
     parent::delete($user);

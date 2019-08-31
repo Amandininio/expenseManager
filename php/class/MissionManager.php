@@ -40,18 +40,16 @@ class MissionManager extends Manager
     }
   }
 
-  public function readWhereFkCommercial($Commercial){
+  public function readWhereFkCommercial(Commercial $Commercial){
     $values=$this->readWhereValue($Commercial->getId(), 'fkCommercial');
-    if ($values) {
-      return $this->buildTableau($values);
+    if (array_key_exists('id',$values)) {
+      return new Mission($values);
+    } else {
+      $tableau=[];
+      foreach ($values as $value) {
+        $tableau[]= new Mission($value);
+      }
+      return $tableau;
     }
-  }
-
-  public function buildTableau($values){
-    $tableau=[];
-    foreach ($values as $value) {
-      $tableau[]= new Mission($value);
-    }
-    return $tableau;
   }
 }
