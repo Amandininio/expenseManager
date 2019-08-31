@@ -35,8 +35,14 @@ class MissionManager extends Manager
 
   public function readAll(){
     $values=parent::readAll();
-    if ($values) {
-      return $this->buildTableau($values);
+    if (array_key_exists('id',$values)) {
+      return new Mission($values);
+    } else {
+      $tableau=[];
+      foreach ($values as $value) {
+        $tableau[]= new Mission($value);
+      }
+      return $tableau;
     }
   }
 
