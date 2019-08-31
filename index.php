@@ -79,7 +79,7 @@ foreach ($vehicules as $vehicule){
 
 
 <!-----------------------Contenu Formulaire----------------------------------------->
-<form id="formulaire" class="container mb-12">
+<form action="listerResa.php" id="formulaire" class="container mb-12">
         <div class="mb-12">
           <div class="col-7">
           <h2 class="mb-12">Formulaire du client</h2>
