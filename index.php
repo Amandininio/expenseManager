@@ -1,6 +1,7 @@
 <?php
 require_once ('model.php');
 require_once ('functions.php');
+require_once ('php/functions.php');
 
 $vehicules = readVehicules($db);
 
@@ -61,7 +62,7 @@ foreach ($vehicules as $vehicule){
               <a class="nav-link" href="">Statistiques</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="#clients.php" tabindex="-1" aria-disabled="true">Clients</a>
+              <a class="nav-link" href="clients.php" tabindex="-1" aria-disabled="true">Clients</a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="#" tabindex="-1">Login</a>
