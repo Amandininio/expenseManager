@@ -15,5 +15,4 @@ $results=$dataManager->readWhereFkCommercial($user);
 // var_dump($results);
 
 // header('Content-Type:application/json');
-echo json_encode($results);
-echo json_last_error();
+var_dump($results);
