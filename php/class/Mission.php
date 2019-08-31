@@ -30,7 +30,7 @@ class Mission extends Entity {
   }
 
   public function setStatut(string $statut){
-    if (in_array($statut,$this->statutPossible)) {
+    if (in_array($statut,$this->statutPossible)){
       $this->statut=$statut;
     } else {
       $this->statut=$this->statutPossible[0];
@@ -49,10 +49,8 @@ class Mission extends Entity {
     }
   }
 
-  public function setCommercial(user $commercial){
-    if ($commercial->getType()=='commercial') {
-      $fk=$commercial->getId();
-      $this->setFkCommercial($fk);
-    }
+  public function setCommercial(Commercial $commercial){
+    $fk=$commercial->getId();
+    $this->setFkCommercial($fk);
   }
 }

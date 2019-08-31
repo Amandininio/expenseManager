@@ -3,9 +3,9 @@
 /**
  *
  */
-class PortefeuilleManager extends Manager {
+class PresenceClientManager extends Manager {
 
-  protected $table='portefeuille';
+  protected $table='presenceclient';
   protected $champs=[
     [
       'nom'=>'id',
@@ -21,20 +21,22 @@ class PortefeuilleManager extends Manager {
     ]
   ];
 
-  public function readWhereFkNoteDeFrais($ndf){
+  public function readWhereFkNoteDeFrais(NoteDeFrais $ndf){
     return $this->readWhereFk($ndf,'fkNoteDeFrais')
   }
 
-  public function readWhereFkClient($client){
+  public function readWhereFkClient(Client $client){
     return $this->readWhereFk($client,'fkClient')
   }
 
-  public function readWhereFk($personne,$fk){
-    $values=$this->readWhereValue($personne->getId(),$fk);
-    if ($values) {
+  public function readWhereFk($element,$fk){
+    $values=$this->readWhereValue($element->getId(),$fk);
+    if (array_key_exists('id',$values)) {
+      return new NoteDeFrais($values);
+    } else {
       $tableau=[];
       foreach ($values as $value) {
-        $tableau[]= new noteDeFrais($value);
+        $tableau[]= new NoteDeFrais($value);
       }
       return $tableau;
     }

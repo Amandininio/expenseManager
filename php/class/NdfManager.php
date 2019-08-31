@@ -5,7 +5,7 @@
  */
 abstract class NdfManager extends Manager
 {
-  protected $table='noteDeFrais';
+  protected $table='notedefrais';
   protected $champs=[
     [
       'nom'=>'id',
@@ -37,10 +37,16 @@ abstract class NdfManager extends Manager
     ]
   ];
 
-  public static function readWhereFkMission($Mission){
+  public static function readWhereFkMission(Mission $Mission){
     parent::__construct();
-    $values=parent::readWhereValue($Mission->getId(), 'fkMission');
-    if ($values) {
+    $values=$this->readWhereValue($Mission->getId(), 'fkMission');
+    if (array_key_exists('id',$values)) {
+      if($values['raison']=='trajet'){
+        return new Trajet($values);
+      } else {
+        return new Facture($values);
+      }
+    } else {
       $tableau=[];
       foreach ($values as $value) {
         if($value['raison']=='trajet'){
