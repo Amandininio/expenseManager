@@ -12,7 +12,6 @@ foreach ($vehicules as $vehicule){
         'Supprimer' => '<input type="checkbox" name="supprimer[]" value="'.$vehicule['Immatriculation'].'"/>',
         'Immatriculation' => '<a href="create.php?id='.$vehicule['Immatriculation'].'" > '.$vehicule['Immatriculation'].'
         </a>',
-        'Immatriculation' => $vehicule['Immatriculation'],
         'Marque' => $vehicule['Marque'],
         /*'Modele' => $vehicule['Modele'],*/
         'Couleur' => $vehicule['Couleur']

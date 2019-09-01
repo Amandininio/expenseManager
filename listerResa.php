@@ -2,6 +2,8 @@
 require_once ('model.php');
 require_once ('functions.php');
 
+
+//=================================================//
 $tableauResas = readtableauResas($db);
 
 // Adapte les données pour l'affichage
@@ -22,6 +24,10 @@ if(isset($_POST['btnUpdate'])) {
     header("location:update.php?idResa=$idResa");
 }
 
+/*if(isset($_POST['btnCreate'])){
+    header("location:create.php");
+}*/
+
 
 
 if(isset($_POST['btnSupprimer'])) {
@@ -31,12 +37,11 @@ if(isset($_POST['btnSupprimer'])) {
     deleteResa($db,$idResa);
     header('location:index.php');
 }
-
-
 ?>
+<!--------------------------------------------------------------->
 
 
-
+<!--------------------------------------------------------------->
 <!doctype html>
 <html lang="fr">
 <head>
@@ -44,8 +49,13 @@ if(isset($_POST['btnSupprimer'])) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
+<!--------------------------------------------------------------->
+
+
+<!--------------------------------------------------------------->
 <body>
 <fieldset>
 
@@ -55,11 +65,11 @@ if(isset($_POST['btnSupprimer'])) {
 
         <input type="submit" name ="btnSupprimer" value="Supprimer" />
         <input type="submit" name="btnUpdate" value="Modifier" />
-    <form>
-
-    </form>
+        <!--<input type="submit" name="btnCreate" value="Créer"/>-->
 </fieldset>
+<!--------------------------------------------------------------->
 
 
+<!--------------------------------------------------------------->
 </body>
 </html>
