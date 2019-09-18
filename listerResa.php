@@ -45,6 +45,7 @@ if(isset($_POST['btnSupprimer'])) {
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
        <!-- Bootstrap CSS -->
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -59,10 +60,10 @@ if(isset($_POST['btnSupprimer'])) {
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Expense Manager</a>
+      <a class="navbar-brand" href="index.php">Expense Manager</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="index.php">Home</a></li>
       <li><a href="listerResa.php">Réservation</a></li>
       <li><a href="update.php">Modifier réservation</a></li>
       <li><a href="clients.php"> Plan & Client</a></li>
@@ -78,7 +79,7 @@ if(isset($_POST['btnSupprimer'])) {
 
 <!--------------------------------------------------------------->
 <body class="padding">
-    <h2 class="padding">Tableau des réservations classé par date</h2>
+    <h2 class="padding">Tableau des réservations classé par date</h2><br><br>
 
 <form method="post" action="" class="padding" >
   <div class="container mb-12">
@@ -88,12 +89,13 @@ if(isset($_POST['btnSupprimer'])) {
 
 <!--------------------------------------------------------------->
 
-<footer class="footer">
+
+</form>
+<nav class="nav-bar-default navbar-fixed-bottom role= navigation background-color: #3D3D3D;">
         <input type="submit" name ="btnSupprimer" class="btn btn-danger" value="Supprimer" />
         <input type="submit" name="btnUpdate" value="Modifier" class="btn btn success" id="modif"/>
         <input type="submit" name="btnCreate" value="Créer" class= "btn btn-primary" id="creer"/>
-</footer>
-</form>
+</nav>
 <!--------------------------------------------------------------->
 </body>
 </html>

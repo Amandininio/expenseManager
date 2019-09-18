@@ -25,7 +25,7 @@ h4{ text-align: center;
 }
 
 #logo{
-    margin-left: 0px;
+    margin: auto;
     position: relative;
     height: 50%;
     width: 50%;
@@ -43,7 +43,7 @@ h4{ text-align: center;
 }
 
 #tableauResa th td{
-    margin: 0px;
+    margin: 100px;
     padding: 0px;
 }
 input{
@@ -113,5 +113,11 @@ googleMap{
 #modif{
   justify-content: space-between;
 
+}
+
+#inscription{
+  background-color: #3D3D3D;
+  padding: 50%;
+  border-radius: 8px;
 }
 

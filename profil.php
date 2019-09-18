@@ -16,13 +16,16 @@ include_once('model.php');
     <title>Document</title>
 </head>
 
-<header>
+<header class="page-header">
 <p>
-    <img src="img/Albert.png" alt="Avatar" style="float:left;width:50px;height:50px;border-raduis:50px">
+    <img src="img/Albert.png" alt="Avatar" class="float:left;width:100%;height:auto border-raduis:50px">
 </p>
 </header>
 
-<body>
+<body class="container">
+
+<label for=""></label>
+<?php echo updateResa($db, $idResa, $dateResa,$collaboResa, $vehiculeResa) ?>
 
 </body>
 </html>

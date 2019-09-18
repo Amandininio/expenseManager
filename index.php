@@ -34,25 +34,25 @@ foreach ($vehicules as $vehicule){
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <title>Expense Manager</title>
   </head>
-  <body class="container mb-12">
-<!-----------------Logo---------------------------------------->
-    <p class="responsive"> 
-      <img src="img/logo1.jfif" alt="" class="responsive"> 
-      <button class="float:right;width:50px;height:50px;border-raduis:50px"></button>
-  </p>
   
-<header class>
+<!-----------------Logo---------------------------------------->
+    <p class="padding"> 
+      <img src="img/logo1.jfif" alt="" class="responsive">   
+  </p>
+
+
+  <header class>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Expense Manager</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="index.php">Home</a></li>
       <li><a href="listerResa.php"> Réservation</a></li>
       <li><a href="update.php">Modifier réservation</a></li>
       <li><a href="clients.php"> Plan & Client</a></li>
-      <li><a href="create.php"> </a></li>
+      <li><a href="profil.php"> </a>Compte Utilisateur</a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
   </div>
@@ -62,9 +62,9 @@ foreach ($vehicules as $vehicule){
 </header>
 <!------------------------Menu--------------------------------------->
 
-
-<h1 class="padding">Gestion de mission</h1>
-<div class="row">
+<body class="container mb-12">
+<h1 class="container">Gestion de mission</h1>
+<div class="container">
       <script>
               var aujourdhui = new Date(); 
               var annee = aujourdhui.getFullYear(); // retourne le millésime
@@ -89,7 +89,7 @@ foreach ($vehicules as $vehicule){
 
 <!-------------Tableau Récap de la réservation voitures ---------------------------------------------------------->
 
-<form action="listerResa.php" method="post" class="container">
+<form action="listerResa.php" method="post" class="footer">
     <fieldset>
               <?php echo afficheTableau($vehiculesAdapte)?><br>
           <input type="submit" name="btnAfficherListe" value="Réservations" class=" btn btn-success" />
@@ -128,7 +128,7 @@ foreach ($vehicules as $vehicule){
 
 
 <!-- Footer -->
-<footer class="row" id="footer">
+<nav class="nav-bar-default navbar-fixed-bottom role= navigation;">
 
   <!-- Footer Elements -->
   <div class="container">
@@ -136,15 +136,11 @@ foreach ($vehicules as $vehicule){
     <!-- Call to action -->
     <ul class="list-unstyled list-inline text-center py-2">
       <li class="list-inline-item">
-        <h5 class="mb-1">Register for free</h5>
-      </li>
-      <li class="list-inline-item">
-        <a href="profil.php" class="btn btn-outline-tertiary btn-rounded">Inscription</a>
+        <a href="profil.php" class="btn btn-outline-tertiary btn-rounded" id="inscription">Inscription</a>
       </li>
     </ul>
     <!-- Call to action -->
-
-  </div>
+</nav>
   <!-- Footer Elements -->
 </body>
 </html>
