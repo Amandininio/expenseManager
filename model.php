@@ -11,7 +11,6 @@ function readVehicules($db){
 
 function readVehicule($db,$id)
 {
-    
     $sql = "SELECT * FROM vehicules WHERE :id = Immatriculation";
    // $id = id;//
     $req = $db->prepare($sql);

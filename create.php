@@ -42,6 +42,9 @@ header('location:index.php');
 
 <!doctype html>
 <html lang="fr">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -49,13 +52,34 @@ header('location:index.php');
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
+<!------------------------------------------------------------------------->
 
+<!------------------------------------------------------------------------>
+<header>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Expense Manager</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="listerResa.php"> Réservation</a></li>
+      <li><a href="update.php">Modifier réservation</a></li>
+      <li><a href="clients.php"> Plan & Client</a></li>
+      <li><a href="create.php"> </a></li>
+    </ul>
+    <!--<button class="btn btn-primary navbar-btn"></button>-->
+  </div>
+</nav>
+</header>
+
+
+<body>
 <form action="" method="post">
 <h1>Entrer le collaborateur et la date de réservation</h1>
 <h1>pour le véhicule immatriculé : <?php 
-                                            if(isset($_GET['id'])){
-                                                echo $_GET['id'];
+                                            if(isset($_GET['idResa'])){
+                                                echo $_GET['idResa'];
                                             }
                                             
                                    ?> </h1>

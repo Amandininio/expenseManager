@@ -1,7 +1,6 @@
 <?php
 require_once ('model.php');
 require_once ('functions.php');
-require_once ('php/functions.php');
 
 $vehicules = readVehicules($db);
 
@@ -30,76 +29,38 @@ foreach ($vehicules as $vehicule){
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <title>Expense Manager</title>
   </head>
   <body class="container mb-12">
-     
- 
 <!-----------------Logo---------------------------------------->
-<p id="logo"> <img src="img/logo1.jfif" alt="" class="logo"> </p>
-    <h1>Gestion de mission</h1>
-    <div class="container mb-">
-      <input type="email" name="email" id="email" class="form-control" placeholder="Login"><br>
-      <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Mot de passe"><br>
-      <button type="submit" class="btn-primary">Connection</button>
-      
+    <p class="responsive"> <img src="img/logo1.jfif" alt="" class="responsive"> </p>
+  
+<header>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Expense Manager</a>
     </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="listerResa.php"> Réservation</a></li>
+      <li><a href="update.php">Modifier réservation</a></li>
+      <li><a href="clients.php"> Plan & Client</a></li>
+      <li><a href="create.php"> </a></li>
+    </ul>
+    <!--<button class="btn btn-primary navbar-btn"></button>-->
+  </div>
+</nav>
+<input type="text" name="search" placeholder="Search..">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Acceuil</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="create.php">Missions<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="">Statistiques</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="clients.php" tabindex="-1" aria-disabled="true">Clients</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="#" tabindex="-1">Login</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Valider</button>
-            
-          </form>
-        </div>
-      </nav>
+</header>
 <!------------------------Menu--------------------------------------->
 
 
-<!-----------------------Contenu Formulaire----------------------------------------->
-<form action="listerResa.php" id="formulaire" class="container mb-12">
-        <div class="mb-12">
-          <div class="col-7">
-          <h2 class="mb-12">Formulaire du client</h2>
-            <input type="text" class="form-control" placeholder="Prénom">
-          </div>
-          <div class="col-7">
-            <input type="text" class="form-control" placeholder="Nom">
-          </div>
-          <div class="form-row">
-                <div class="col-7">
-                  <input type="text" class="form-control" placeholder="Ville">
-                </div>
-                <div class="col-7">
-                  <input type="text" class="form-control" placeholder="Email">
-                </div>
-                <div class="col-7">
-                  <input type="text" class="form-control" placeholder="Numéro de téléphone">
-                </div>
-              </div>
-
-<!------------------Heure & Date--------------------------------------->
+<h1 class="padding">Gestion de mission</h1>
 <div class="row">
       <script>
               var aujourdhui = new Date(); 
@@ -125,14 +86,14 @@ foreach ($vehicules as $vehicule){
 
 <!-------------Tableau Récap de la réservation voitures ---------------------------------------------------------->
 
-      <form action="listerResa.php" method="post">
+<form action="listerResa.php" method="post">
+    <fieldset>
               <?php echo afficheTableau($vehiculesAdapte)?><br>
           <input type="submit" name="btnAfficherListe" value="Réservations" id="boutton" />
-      </form>
-</fieldset>
- </div>
+      
+    </fieldset>
+</form>
 </div>
-
 <!-----------------------Contenu----------------------------------------->
 
 
@@ -145,7 +106,7 @@ foreach ($vehicules as $vehicule){
 </div>
 
 <!-----------------------Choix du fichier a télécharger-------------------------------------------------------->
-      <div class="container">
+      <div class="padding">
         <div class="input-group mb-2" id= "rechercheDoc">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroupFileAddon01">Charger votre fichier</span>
@@ -163,47 +124,24 @@ foreach ($vehicules as $vehicule){
 <!-------------------------Frais de déplacement---------------------------------------------->
 
 
-<!----------------------- Tableau Récapitulatif Portefeuil client---------------------------------------------------------------------->
-<div class="container">
-<h4 id="row">Tableau récapitulatif du portefeuille client</h4>
-<table class="table table-hover mb-12">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Prenom</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Email</th>
-            <th scope="col">Frais</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<!-- Footer -->
+<footer class="" id="footer">
 
-      
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
-  </body>
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!-- Call to action -->
+    <ul class="list-unstyled list-inline text-center py-2">
+      <li class="list-inline-item">
+        <h5 class="mb-1">Register for free</h5>
+      </li>
+      <li class="list-inline-item">
+        <a href="" class="btn btn-outline-white btn-rounded">Inscription</a>
+      </li>
+    </ul>
+    <!-- Call to action -->
+
+  </div>
+  <!-- Footer Elements -->
+</body>
 </html>

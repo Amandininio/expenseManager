@@ -5,15 +5,35 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+       <!-- Bootstrap CSS -->
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> 
     <title>Document</title>
 </head>
 <!-------------------------------------------------------------------------------------------------------------------->
 
-
+<header>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Expense Manager</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="listerResa.php">Réservation</a></li>
+      <li><a href="update.php">Modifier réservation</a></li>
+      <li><a href="clients.php"> Plan & Client</a></li>
+    </ul>
+    <!--<button class="btn btn-primary navbar-btn"></button>-->
+  </div>
+</nav>
+<input class="autofocus" type="text" name="search" placeholder="Search">
+</header>
 <!-------------------------------------------------------------------------------------------------------------------->
-<body>
+<body class="">
 <fieldset>
-<h1>Modifier une réservation : </h1>
+<h1 class="">Modifier la réservation  </h1>
 <?php
 require_once ('model.php');
 require_once ('functions.php');
@@ -51,25 +71,26 @@ if(isset($_POST['listeCollaborateur'])) {
 ?>
 </fieldset><br />
 
-<h1>Modifiez les champs souhaités et cliquez sur</h1>
-<h1>ENREGISTRER pour modifier la réservation suivante :  </h1>
 <fieldset>
-<p>Choix du collaborateur : </p>
+<p class="p">Choix du collaborateur : </p>
 
-<form method="post" action="">
-    <select name="listeCollaborateur">
+<form method="post" action="" class="">
+    <select name="listeCollaborateur" class="padding mb-12">
         <?php echo selectOptions(afficherListeCollaborateurs($collaborateursAdapte),$reservations['collaboResa'])?>
-    </select>
-    <p>Liste Véhicules : </p>
+    </select><br>
+
+    
+    <p class="p">Liste Véhicules : </p>
     <select name="listeVehicule">
         <?php echo selectOptions(afficherVehicules($vehiculesAdapte),$reservations['vehiculeResa'])?>
     </select>
-    <p>Date de reservation : </p>
+
+    <p class="p">Date de reservation : </p>
     <select name="jour"><?php echo selectOptionsNumeric(1,31,$dateResa[2])?></select>
     <select name="mois"><?php echo selectOptionsNumeric(1,12,$dateResa[1])?></select>
     <select name="annee"><?php echo selectOptionsNumeric(2019,2023,$dateResa[0])?></select><br />
 
-    <input type="submit" value="Enregistrer">
+    <input type="submit" value="Enregistrer" class="btn-primary">
 
 </form>
 </fieldset>
