@@ -29,16 +29,19 @@ foreach ($vehicules as $vehicule){
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <title>Expense Manager</title>
   </head>
   <body class="container mb-12">
 <!-----------------Logo---------------------------------------->
-    <p class="responsive"> <img src="img/logo1.jfif" alt="" class="responsive"> </p>
+    <p class="responsive"> 
+      <img src="img/logo1.jfif" alt="" class="responsive"> 
+      <button class="float:right;width:50px;height:50px;border-raduis:50px"></button>
+  </p>
   
-<header>
+<header class>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -86,10 +89,10 @@ foreach ($vehicules as $vehicule){
 
 <!-------------Tableau Récap de la réservation voitures ---------------------------------------------------------->
 
-<form action="listerResa.php" method="post">
+<form action="listerResa.php" method="post" class="container">
     <fieldset>
               <?php echo afficheTableau($vehiculesAdapte)?><br>
-          <input type="submit" name="btnAfficherListe" value="Réservations" id="boutton" />
+          <input type="submit" name="btnAfficherListe" value="Réservations" class=" btn btn-success" />
       
     </fieldset>
 </form>
@@ -125,7 +128,7 @@ foreach ($vehicules as $vehicule){
 
 
 <!-- Footer -->
-<footer class="" id="footer">
+<footer class="row" id="footer">
 
   <!-- Footer Elements -->
   <div class="container">
@@ -136,7 +139,7 @@ foreach ($vehicules as $vehicule){
         <h5 class="mb-1">Register for free</h5>
       </li>
       <li class="list-inline-item">
-        <a href="" class="btn btn-outline-white btn-rounded">Inscription</a>
+        <a href="profil.php" class="btn btn-outline-tertiary btn-rounded">Inscription</a>
       </li>
     </ul>
     <!-- Call to action -->

@@ -77,24 +77,24 @@ header('location:index.php');
 <body>
 <form action="" method="post">
 <h1>Entrer le collaborateur et la date de réservation</h1>
-<h1>pour le véhicule immatriculé : <?php 
-                                            if(isset($_GET['idResa'])){
-                                                echo $_GET['idResa'];
+<h1>pour le véhicule immatriculé :<h1> <?php 
+                                            if(isset($_GET['id'])){
+                                                echo $_GET['id'];
                                             }
                                             
                                    ?> </h1>
 <p>Choix du collaborateur : </p>
 
-
-    <h3></h3>
     <?php echo afficheTableau($collaborateursAdapte); readVehicule($db,$_GET['id'])?>
-    <p>Date de reservation : </p>
-    <select name="jour"><?php echo selectOptionsNumeric(1,31,$dateResa[2])?></select>
-    <select name="mois"><?php echo selectOptionsNumeric(1,12,$dateResa[1])?></select>
-    <select name="annee"><?php echo selectOptionsNumeric(2019,2023,$dateResa[0])?></select><br />
+    <p>Date de reservation :
+        <select name="jour"><?php echo selectOptionsNumeric(1,31,$dateResa[2])?></select>
+        <select name="mois"><?php echo selectOptionsNumeric(1,12,$dateResa[1])?></select>
+        <select name="annee"><?php echo selectOptionsNumeric(2019,2023,$dateResa[0])?></select><br/>
+    </p>
 
-    <input type="submit" value="Enregistrer" >
-
+    <div class="container">
+        <button type="submit" value="Enregistrer" class="btn btn-primary"></button>
+    </div>
 </form>
 </body>
 </html>

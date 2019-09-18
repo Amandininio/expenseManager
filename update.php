@@ -37,7 +37,7 @@
 <?php
 require_once ('model.php');
 require_once ('functions.php');
-
+if(isset($_GET['idResa'])){
 $reservations = readResa($db,$_GET['idResa']);
 $dateResa = explode( '-', $reservations['dateResa'] );
 $collaborateurs = readCollaborateurs($db);
@@ -75,24 +75,30 @@ if(isset($_POST['listeCollaborateur'])) {
 <p class="p">Choix du collaborateur : </p>
 
 <form method="post" action="" class="">
-    <select name="listeCollaborateur" class="padding mb-12">
+    <select name="listeCollaborateur" class="form-control">
         <?php echo selectOptions(afficherListeCollaborateurs($collaborateursAdapte),$reservations['collaboResa'])?>
     </select><br>
 
     
     <p class="p">Liste Véhicules : </p>
-    <select name="listeVehicule">
+    <select name="listeVehicule" class="form-control">
         <?php echo selectOptions(afficherVehicules($vehiculesAdapte),$reservations['vehiculeResa'])?>
     </select>
 
     <p class="p">Date de reservation : </p>
-    <select name="jour"><?php echo selectOptionsNumeric(1,31,$dateResa[2])?></select>
-    <select name="mois"><?php echo selectOptionsNumeric(1,12,$dateResa[1])?></select>
-    <select name="annee"><?php echo selectOptionsNumeric(2019,2023,$dateResa[0])?></select><br />
+    <select name="jour" class="form-control"><?php echo selectOptionsNumeric(1,31,$dateResa[2])?></select>
+    <select name="mois" class="form-control"><?php echo selectOptionsNumeric(1,12,$dateResa[1])?></select>
+    <select name="annee" class="form-control"><?php echo selectOptionsNumeric(2019,2023,$dateResa[0])?></select><br />
 
-    <input type="submit" value="Enregistrer" class="btn-primary">
+    <input type="submit" value="Enregistrer" class="btn btn-primary">
 
 </form>
 </fieldset>
+<?php
+} else {
+    header('Location: http://localhost/expenseManager2/listerResa.php');    
+}
+?>
+
 </body>
 </html>
