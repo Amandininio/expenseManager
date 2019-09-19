@@ -65,7 +65,7 @@ if(isset($_POST['btnSupprimer'])) {
     <ul class="nav navbar-nav">
       <li class="active"><a href="index.php">Home</a></li>
       <li><a href="listerResa.php">Réservation</a></li>
-      <li><a href="update.php">Modifier réservation</a></li>
+     
       <li><a href="clients.php"> Plan & Client</a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
@@ -81,7 +81,7 @@ if(isset($_POST['btnSupprimer'])) {
 <body class="padding">
     <h2 class="padding">Tableau des réservations classé par date</h2><br><br>
 
-<form method="post" action="" class="padding" >
+<form method="post" action="#" class="padding" >
   <div class="container mb-12">
     <?php echo afficheTableau($tableauResaAdapte) ?>
   </div>
@@ -90,12 +90,13 @@ if(isset($_POST['btnSupprimer'])) {
 <!--------------------------------------------------------------->
 
 
-</form>
-<nav class="nav-bar-default navbar-fixed-bottom role= navigation background-color: #3D3D3D;">
+
+<div class="block">
         <input type="submit" name ="btnSupprimer" class="btn btn-danger" value="Supprimer" />
-        <input type="submit" name="btnUpdate" value="Modifier" class="btn btn success" id="modif"/>
+        <input type="submit" name="btnUpdate" value="Modifier" class="btn btn-success" id="modif"/>
         <input type="submit" name="btnCreate" value="Créer" class= "btn btn-primary" id="creer"/>
-</nav>
+</div>
+</form>
 <!--------------------------------------------------------------->
 </body>
 </html>

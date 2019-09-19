@@ -65,8 +65,8 @@ header('location:index.php');
     <ul class="nav navbar-nav">
       <li class="active"><a href="index.php">Home</a></li>
       <li><a href="listerResa.php"> Réservation</a></li>
-      <li><a href="update.php">Modifier réservation</a></li>
       <li><a href="clients.php"> Plan & Client</a></li>
+      <li><a href="profil.php"> Compte Utilisateur</a></li>
       <li><a href="create.php"> </a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
@@ -94,8 +94,10 @@ header('location:index.php');
     </p>
 
     <div class="container">
-        <button type="submit" value="Enregistrer" class="btn btn-primary"></button>
+    <input type="submit" name="btnUpdate" value="Modifier" class="btn btn-success" id="modif"/>
+    <input type="submit" name="btnCreate" value="Créer" class= "btn btn-primary" id="creer"/>
     </div>
+    
 </form>
 </body>
 </html>

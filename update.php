@@ -22,8 +22,8 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
       <li><a href="listerResa.php">Réservation</a></li>
-      <li><a href="update.php">Modifier réservation</a></li>
       <li><a href="clients.php"> Plan & Client</a></li>
+      <li><a href="profil.php">Profil</a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
   </div>
@@ -90,8 +90,10 @@ if(isset($_POST['listeCollaborateur'])) {
     <select name="mois" class="form-control"><?php echo selectOptionsNumeric(1,12,$dateResa[1])?></select>
     <select name="annee" class="form-control"><?php echo selectOptionsNumeric(2019,2023,$dateResa[0])?></select><br />
 
+<div class="block mb-12">
     <input type="submit" value="Enregistrer" class="btn btn-primary">
-
+    <input type="submit" name ="btnSupprimer" class="btn btn-danger" value="Supprimer" />
+</div>
 </form>
 </fieldset>
 <?php

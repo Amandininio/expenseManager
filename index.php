@@ -129,19 +129,9 @@ foreach ($vehicules as $vehicule){
 
 
 <!-- Footer -->
-<nav class="nav-bar-default navbar-fixed-bottom role= navigation;">
+<footer>
 
-  <!-- Footer Elements -->
-  <div class="container">
-
-    <!-- Call to action -->
-    <ul class="list-unstyled list-inline text-center py-2">
-      <li class="list-inline-item">
-        <a href="profil.php" class="btn btn-outline-tertiary btn-rounded" id="inscription">Inscription</a>
-      </li>
-    </ul>
-    <!-- Call to action -->
-</nav>
+</footer>
   <!-- Footer Elements -->
 </body>
 </html>

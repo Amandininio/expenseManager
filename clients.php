@@ -1,21 +1,6 @@
 <?php
 require_once ('model.php');
 require_once ('functions.php');
-
-$vehicules = readVehicules($db);
-
-// Adapte les données pour l'affichage
-$vehiculesAdapte = [];
-foreach ($vehicules as $vehicule){
-    $vehiculesAdapte[] = [
-        'Supprimer' => '<input type="checkbox" name="supprimer[]" value="'.$vehicule['Immatriculation'].'"/>',
-        'Immatriculation' => '<a href="create.php?id='.$vehicule['Immatriculation'].'" > '.$vehicule['Immatriculation'].'
-        </a>',
-        'Marque' => $vehicule['Marque'],
-        /*'Modele' => $vehicule['Modele'],*/
-        'Couleur' => $vehicule['Couleur']
-    ];
-}
 ?>
 <!--------------------------------------------------------------------------------------------------->
 
@@ -47,7 +32,7 @@ foreach ($vehicules as $vehicule){
       <li><a href="listerResa.php"> Réservation</a></li>
       <li><a href="update.php">Modifier réservation</a></li>
       <li><a href="clients.php"> Plan & Client</a></li>
-      <li><a href="create.php"> </a></li>
+      <li><a href="profil.php"> Compte Utilisateur</a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
   </div>
@@ -65,7 +50,7 @@ foreach ($vehicules as $vehicule){
 </div>
 
 <form action="listerResa.php" id="formulaire" class="container mb-12" method="post">
-    <div class="mb-12">
+    <div class="row">
           <div class="col-7">
           <h2 class="mb-12">Formulaire Client</h2>
             <input type="text" class="form-control" placeholder="Prénom">
@@ -73,20 +58,19 @@ foreach ($vehicules as $vehicule){
           <div class="col-7">
             <input type="text" class="form-control" placeholder="Nom">
           </div>
-          <div class="form-row">
-                <div class="col-7">
-                  <input type="text" class="form-control" placeholder="Ville">
-                </div>
-                <div class="col-7">
+          <div class="col-7">
+            <input type="text" class="form-control" placeholder="Ville">
+          </div>
+          <div class="col-7">
                   <input type="text" class="form-control" placeholder="Email">
-                </div>
-                <div class="col-7">
+          </div>
+          <div class="col-7">
                   <input type="text" class="form-control" placeholder="Numéro de téléphone">
-                </div>
-                <button type="submit" class="btn-primary">Connection</button>
-           </div>
+          </div>
+          <div>
+                <button type="submit" class="btn btn-primary">Connection</button>
+          </div>
     </div>
-</div>
 </form>
 </body>
 </html>
