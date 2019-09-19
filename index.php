@@ -4,15 +4,16 @@ require_once ('functions.php');
 
 $vehicules = readVehicules($db);
 
+
 // Adapte les données pour l'affichage
 $vehiculesAdapte = [];
 foreach ($vehicules as $vehicule){
     $vehiculesAdapte[] = [
-        'Supprimer' => '<input type="checkbox" name="supprimer[]" value="'.$vehicule['Immatriculation'].'"/>',
+        //'Supprimer' => '<input type="checkbox" name="supprimer[]" value="'.$vehicule['Immatriculation'].'"/>',
         'Immatriculation' => '<a href="create.php?id='.$vehicule['Immatriculation'].'" > '.$vehicule['Immatriculation'].'
         </a>',
         'Marque' => $vehicule['Marque'],
-        /*'Modele' => $vehicule['Modele'],*/
+        //'Modele' => $vehicule['Modele'],
         'Couleur' => $vehicule['Couleur']
     ];
 }
@@ -52,7 +53,7 @@ foreach ($vehicules as $vehicule){
       <li><a href="listerResa.php"> Réservation</a></li>
       <li><a href="update.php">Modifier réservation</a></li>
       <li><a href="clients.php"> Plan & Client</a></li>
-      <li><a href="profil.php"> </a>Compte Utilisateur</a></li>
+      <li><a href="profil.php"> Compte Utilisateur</a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
   </div>

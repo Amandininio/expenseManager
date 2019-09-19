@@ -20,11 +20,11 @@ foreach ($collaborateurs as $collaborateur){
 
 
 if(isset($_POST['jour'])) {
-$annee = $_POST['annee'];
-$mois= $_POST["mois"];
-$jour= $_POST["jour"];
-$idVehicule = $_GET["id"];
-$idCollabo = $_POST['selection'];
+         $annee = $_POST['annee'];
+         $mois= $_POST["mois"];
+         $jour= $_POST["jour"];
+         $idVehicule = $_GET["id"];
+         $idCollabo = $_POST['selection'];
 
     ajoutReservation($db, $annee, $mois, $jour, $idVehicule, $idCollabo);
 

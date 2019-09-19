@@ -18,14 +18,45 @@ include_once('model.php');
 
 <header class="page-header">
 <p>
-    <img src="img/Albert.png" alt="Avatar" class="float:left;width:100%;height:auto border-raduis:50px">
+    <img src="img/Albert.png" alt="Avatar" id="img">
 </p>
 </header>
 
 <body class="container">
 
 <label for=""></label>
-<?php echo updateResa($db, $idResa, $dateResa,$collaboResa, $vehiculeResa) ?>
 
+<div>
+<?php
+$collaborateurs = readCollaborateurs($db);
+
+// Adapte les données pour l'affichage
+$collaborateursAdapte = [];
+foreach ($collaborateurs as $collaborateur){
+    $collaborateursAdapte[] = [
+        'Selection' => '<input type="radio"
+                        name="selection"
+                        value="'.$collaborateur['Genre'].' '.$collaborateur['Nom'].' '.$collaborateur['Prenom'].'"/>',
+        'Genre' => $collaborateur['Genre'],
+        'Nom' => $collaborateur['Nom'],
+        'Prenom' => $collaborateur['Prenom'],
+    ];
+}
+
+
+if(isset($_POST['jour'])) {
+         $annee = $_POST['annee'];
+         $mois= $_POST["mois"];
+         $jour= $_POST["jour"];
+         $idVehicule = $_GET["id"];
+         $idCollabo = $_POST['selection'];
+
+    ajoutReservation($db, $annee, $mois, $jour, $idVehicule, $idCollabo);
+
+header('location:index.php');
+}
+afficherListeCollaborateurs($collaborateurs);
+?>
+</div>
 </body>
 </html>
