@@ -23,19 +23,21 @@ if(isset($_POST['connection']))
               if(filter_var($Mdp))
                  if($Mdp ==  $Mdp2)
                  {
-                      $insertMbr = $db->prepare("INSERT INTO collaborateurs (login, password, Prenom) VALUES (?, ?, ?)");
-                      $insertMbr->execute(array($Email, $Mdp, $Prenom)) or die('Error: '. mysql_error() );
+                      $insertMbr = $db->prepare("INSERT INTO collaborateurs (login, password) VALUES (?, ?)");
+                      $insertMbr->execute(array($Email, $Mdp)) or die('Error: '. mysql_error() );
                       $erreur = "Votre compte à bien été créer !";
-
-                 } else
+//=============Redirection une fois l'insertion faite=================================//
+                      header('location: index.php');
+                 } 
+                 else
                  {
                     $erreur = "Les mot de passe ne sont pas identiques ";
                  }
-                  }
-                  else
-                  {
+                 }
+                 else
+                 {
                         $erreur = "Ton Prénom est trop long, on n'est pas des Russe !! ";
-                  }
+                 }
               }
               else
               {
@@ -47,7 +49,7 @@ if(isset($_POST['connection']))
 <!--=====Condition de sécurité & de remplissage formulaire correct=============================================================================================================================================================================*/-->
 
 
-
+<!--------------------------------------------------------------------------------------------------------------------------------------------->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,6 +70,9 @@ if(isset($_POST['connection']))
 
 <body class="container">
 <h3 class="padding">Profil</h3>
+<!----------------------------------------------------------------------------------------------------------------------------------->
+
+<!----------------------------------------------------------------------------------------------------------------------------------->
 <?php
 //$collaborateurs = readCollaborateurs($db);
 
@@ -103,7 +108,7 @@ if(isset($_POST['connection']))
 //?>
 
 
-
+<!---------------Formulaire d'inscription à la base de données-------------------------------------------------------------------------------------------------------------------->
 <form action="" id="formulaire" class="container mb-12" method="POST">
     <table class="row">
           <div class="col-7">
@@ -133,6 +138,10 @@ if(isset($_POST['connection']))
           </div>
     </table>
 </form>
+<!-----------FIN DE FORMULAIRE------------------------------------------------------------------------------------------------------------------->
+
+
+<!-----------Message d'erreur------------------------------------------------------------------------------------------------------------------------>
 <?php
 if(isset($erreur))
 {
