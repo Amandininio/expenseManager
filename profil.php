@@ -26,6 +26,7 @@ if(isset($_POST['connection']))
                       $insertMbr = $db->prepare("INSERT INTO collaborateurs (login, password) VALUES (?, ?)");
                       $insertMbr->execute(array($Email, $Mdp)) or die('Error: '. mysql_error() );
                       $erreur = "Votre compte à bien été créer !";
+                      $_SESSION['comptecree'] = "Votre compte à bien était enregistrer";
 //=============Redirection une fois l'insertion faite=================================//
                       header('location: index.php');
                  } 
@@ -125,16 +126,16 @@ if(isset($_POST['connection']))
                   <input type="email" class="form-control" placeholder="Email" value="<?php if(isset($Email)) { echo $Email; } ?>">
           </div>
           <div class="col-7">
-            <input type="password" class="form-control" placeholder="Mot de Passe" name='Mdp'id='Mdp'>
+            <input type="password" class="form-control" placeholder="Mot de Passe" name='Mdp'id='Mdp' value="Mdp">
           </div>
           <div class="col-7">
-            <input type="password" class="form-control" placeholder=" Confirmer le mot de passe" name='Mdp2'id='Mdp2'>
+            <input type="password" class="form-control" placeholder=" Confirmer le mot de passe" name='Mdp2'id='Mdp2' value="Mdp2">
           </div>
           <div class="col-7">
                   <input type="number" class="form-control" placeholder="Numéro de téléphone"  name="Tel" value="<?php if(isset($Tel)) { echo $Tel; } ?>">
           </div><br>
           <div class="col-1">
-                <button type="submit" class="btn btn-primary" name="connection">Connection</button>
+                <button type="submit" class="btn btn-primary" name="connection" value= "connection">Connection</button>
           </div>
     </table>
 </form>
