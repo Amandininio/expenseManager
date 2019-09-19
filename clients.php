@@ -1,23 +1,29 @@
 <?php
-
+$db = new PDO('mysql:host=localhost;dbname=expensemanager;charset=utf8','root','');
 require_once ('model.php');
 require_once ('functions.php');
-/*=====Condition de sécurité & de remplissage formulaire correct=============================================================================================================================================================================*/
-if(isset($_POST['connection']))
-{           
-            echo "ok";
-            $Prenom = htmlspecialchars($_POST['Prenom']);
-            $Nom = htmlspecialchars($_POST['Nom']);
-            $Ville = htmlspecialchars($_POST['Ville']);
-            $Tel = htmlspecialchars($_POST['Tel']);
-            $Email = htmlspecialchars($_POST ['Email']);
-          //$Genre = htmlspecialchars ($_POST ['Genre']); //
-            //$Mdp = sha1();//
+//=====Condition de sécurité & de remplissage formulaire correct=============================================================================================================================================================================//
+//if(isset($_POST['connection']))
+//{           
+            //echo "ok";
+          //  $Prenom = htmlspecialchars($_POST['Prenom']);
+           // $Nom = htmlspecialchars($_POST['Nom']);
+           // $Ville = htmlspecialchars($_POST['Ville']);
+           // $Tel = htmlspecialchars($_POST['Tel']);
+           // $Email = htmlspecialchars($_POST ['Email']);
+          //$Genre = htmlspecialchars ($_POST ['Genre']);
+           // $Mdp = sha1();
             //$Mdp2 = sha1();//
 
-        if(!empty($_POST['Prenom']) AND !empty($_POST['Nom']) AND !empty($_POST['Ville']) AND !empty($_POST['Email']) AND !empty($_POST['Mdp']) AND !empty($_POST['Mdp2']) AND !empty($_POST['Tel']))
+        if(!empty($_POST['Prenom']) AND 
+           !empty($_POST['Nom']) AND 
+           !empty($_POST['Ville']) AND 
+           !empty($_POST['Email']) AND 
+           !empty($_POST['Mdp']) AND 
+           !empty($_POST['Mdp2']) AND 
+           !empty($_POST['Tel']))
         {
-            
+            //
             $Prenomlength = strlen($Prenomlength);
             if($Prenomlength <= 50)
             {
@@ -30,11 +36,11 @@ if(isset($_POST['connection']))
                     {
                         if(filter_var($Mdp))
                         if($Mdp ==  $Mdp2)
-                   {                         //==Insertion du Client dans la Base de Donnée
+                   {                         //==Insertion du Client dans la Base de Donnée==//
                       $insertMbr = $db->prepare("INSERT INTO clients (login, password) VALUES (?, ?)");
                       $insertMbr->execute(array($Email, $Mdp)) or die('Error: '. mysql_error() );
                       $erreur = "Votre compte à bien été créer !";
-                      $_SESSION['comptecree'] = "Votre compte à bien était enregistrer";
+                      $_SESSION['comptecree'] = "Votre compte à bien était enregistrer";//
 //================================================Redirection une fois l'insertion faite=================================//
                       header('location: index.php');
                  } 
@@ -96,7 +102,7 @@ if(isset($_POST['connection']))
 </header>
 
 <body>
-<h1>Page Clients</h1>
+<!--<h1>Page Clients</h1>
     
    
 <div id="googleMap" style="width:100%;height:azuto;">
@@ -105,7 +111,7 @@ if(isset($_POST['connection']))
 </div>
 
 <!---------------Formulaire d'inscription à la base de données-------------------------------------------------------------------------------------------------------------------->
-<form action="" id="formulaire" class="container mb-12" method="POST">
+<!--<form action="" id="formulaire" class="container mb-12" method="POST">
     <table class="row">
           <div class="col-7">
           <h2 class="mb-2">Formulaire Inscription</h2>
@@ -141,13 +147,13 @@ if(isset($_POST['connection']))
 <!----------------------------Messages d'Erreur Formulaire-------------------------------------------------------------------------------------->
 
 
-<footer>
-  <?php
-    if(isset($erreur))
-    {
-        echo '<font color= "red">'.$erreur."</font>";
-    }
+<!--<footer>
+ <?php
+   // if(isset($erreur))
+   // {
+   //     echo '<font color= "red">'.$erreur."</font>";
+   // }
 ?>
-</footer>
+</footer>-->
 </body>
 </html>
