@@ -1,39 +1,49 @@
 <?php
+
 require_once ('model.php');
 require_once ('functions.php');
 /*=====Condition de sécurité & de remplissage formulaire correct=============================================================================================================================================================================*/
 if(isset($_POST['connection']))
-{
-        if(!empty($_POST['Prenom']) AND !empty($_POST['Nom']) AND !empty($_POST['Ville']) AND !empty($_POST['Email']) AND !empty($_POST['Mdp']) AND !empty($_POST['Mdp2']) AND !empty($_POST['Tel']))
-        {
+{           
             echo "ok";
             $Prenom = htmlspecialchars($_POST['Prenom']);
             $Nom = htmlspecialchars($_POST['Nom']);
             $Ville = htmlspecialchars($_POST['Ville']);
             $Tel = htmlspecialchars($_POST['Tel']);
-            $Email = htmlspecialchars($_POST ['email']);
+            $Email = htmlspecialchars($_POST ['Email']);
           //$Genre = htmlspecialchars ($_POST ['Genre']); //
-            $Mdp = sha1();
-            $Mdp2 = sha1();
+            //$Mdp = sha1();//
+            //$Mdp2 = sha1();//
 
+        if(!empty($_POST['Prenom']) AND !empty($_POST['Nom']) AND !empty($_POST['Ville']) AND !empty($_POST['Email']) AND !empty($_POST['Mdp']) AND !empty($_POST['Mdp2']) AND !empty($_POST['Tel']))
+        {
+            
             $Prenomlength = strlen($Prenomlength);
             if($Prenomlength <= 50)
             {
-              if(filter_var($Mdp))
-                 if($Mdp ==  $Mdp2)
-                 {                         //==Insertion du Client dans la Base de Donnée
+              if(filter_var($Email, FILTER_VALIDATE_EMAIL))
+              {
+                    $reqmail = $db->prepare("SELECT * FROM clients WHERE Email = ?");
+                    $reqmail->execute(array($Email));
+                    $mailexist = $reqmail->rowCount();
+                    if($mailexist == 0)
+                    {
+                        if(filter_var($Mdp))
+                        if($Mdp ==  $Mdp2)
+                   {                         //==Insertion du Client dans la Base de Donnée
                       $insertMbr = $db->prepare("INSERT INTO clients (login, password) VALUES (?, ?)");
                       $insertMbr->execute(array($Email, $Mdp)) or die('Error: '. mysql_error() );
                       $erreur = "Votre compte à bien été créer !";
                       $_SESSION['comptecree'] = "Votre compte à bien était enregistrer";
-//=============Redirection une fois l'insertion faite=================================//
+//================================================Redirection une fois l'insertion faite=================================//
                       header('location: index.php');
                  } 
                  else
                  {
                     $erreur = "Les mot de passe ne sont pas identiques ";
                  }
-                 }
+                }
+              
                  else
                  {
                         $erreur = "Ton Prénom est trop long, on n'est pas des Russe !! ";
@@ -120,7 +130,7 @@ if(isset($_POST['connection']))
                   <input type="number" class="form-control" placeholder="Numéro de téléphone"  name="Tel" value="<?php if(isset($Tel)) { echo $Tel; } ?>">
           </div><br>
           <div class="col-1">
-                <button type="submit" class="btn btn-primary" name="Inscription" value= "connection">Connection</button>
+                <button type="submit" class="btn btn-primary" name="connection" value= "connection">Inscription</button>
           </div>
     </table>
 </form>
@@ -129,12 +139,15 @@ if(isset($_POST['connection']))
 
 
 <!----------------------------Messages d'Erreur Formulaire-------------------------------------------------------------------------------------->
-<?php
-if(isset($erreur))
-{
-    echo '<font color= "red">'.$erreur."</font>";
-}
+
+
+<footer>
+  <?php
+    if(isset($erreur))
+    {
+        echo '<font color= "red">'.$erreur."</font>";
+    }
 ?>
+</footer>
 </body>
 </html>
-

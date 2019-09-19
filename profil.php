@@ -39,11 +39,11 @@ if(isset($_POST['connection']))
                  {
                         $erreur = "Ton Prénom est trop long, on n'est pas des Russe !! ";
                  }
-              }
-              else
-              {
+                 }
+                 else
+                 {
                   $erreur = 'Tous les champs doivent être remplies !!'; 
-              }
+                 }
 }
 
 ?>
@@ -146,7 +146,7 @@ if(isset($_POST['connection']))
 <?php
 if(isset($erreur))
 {
-    echo '<font color= "red">'.$erreur."</font>";
+    echo '<font color= "red">'.$erreur.'</font>';
 }
 ?>
 </body>
