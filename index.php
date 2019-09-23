@@ -53,7 +53,7 @@ foreach ($vehicules as $vehicule){
       <li><a href="listerResa.php"> Réservation</a></li>
       <li><a href="update.php">Modifier réservation</a></li>
       <li><a href="clients.php"> Plan & Client</a></li>
-      <li><a href="profil.php"> Compte Utilisateur</a></li>
+      <li><a href="connection.php"> Compte Utilisateur</a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
   </div>

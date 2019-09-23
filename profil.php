@@ -1,5 +1,9 @@
 <?php
+
+session_start();
+
 $mysqli = new mysqli("localhost", "root", "", "expensemanager");
+
 
 require_once ('model.php');
 require_once ('functions.php');
@@ -12,7 +16,7 @@ if(isset($_POST['connection']))
   $Ville = htmlspecialchars($_POST['Ville']);
   $Genre = htmlspecialchars($_POST['Genre']);
   $Email = htmlspecialchars($_POST ['Email']);
-  //$Genre = htmlspecialchars ($_POST ['Genre']);
+  $Genre = htmlspecialchars($_POST ['Genre']);
   $Mdp = sha1($_POST ['Mdp']);
   $Mdp2 = sha1($_POST ['Mdp2']);//
 
@@ -157,7 +161,7 @@ if(isset($_POST['connection']))
                   <input type="text" class="form-control" placeholder="Genre"  name="Genre" value="<?php if(isset($Genre)) { echo $Genre; } ?>">
           </div><br>
           <div class="col-1">
-                <button type="submit" class="btn btn-primary" name="connection" value= "connection">Connection</button>
+                <button type="submit" class="btn btn-primary" name="connection" value= "connection">Inscription</button>
           </div>
     </table>
 </form>
