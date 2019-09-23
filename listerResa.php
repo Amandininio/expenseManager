@@ -94,7 +94,7 @@ if(isset($_POST['btnSupprimer'])) {
 <div class="block">
         <input type="submit" name ="btnSupprimer" class="btn btn-danger" value="Supprimer" />
         <input type="submit" name="btnUpdate" value="Modifier" class="btn btn-success" id="modif"/>
-        <input type="submit" name="btnCreate" value="Créer" class= "btn btn-primary" id="creer"/>
+        <input type="submit" name="btnUpdate" value="Creer" class= "btn btn-primary" id="creer"/>
 </div>
 </form>
 <!--------------------------------------------------------------->

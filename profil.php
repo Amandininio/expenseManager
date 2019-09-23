@@ -1,16 +1,21 @@
 <?php
-
 session_start();
-
-$mysqli = new mysqli("localhost", "root", "", "expensemanager");
-
-
 require_once ('model.php');
 require_once ('functions.php');
+$mysqli = new mysqli("localhost", "root", "", "expensemanager");
+
 //=====Condition de sécurité & de remplissage formulaire correct=============================================================================================================================================================================//
-if(isset($_POST['connection']))
-{           
-  echo "ok";
+if(isset($_GET['id']) AND $_GET['id'] > 0); {
+  //========Variable Transf le string en numéric==//
+  $getid = intval($_GET['id']);
+  //========Variable Transf le string en numéric==//
+
+  //=======Requete Base donnée=======================================================================//
+  $requser = $db->prepare('SELECT * FROM profil WHERE id = ?');
+  $requser->execute(array($getid));
+  //===Info utilisateur==========================//
+  $userinfo = $requser->fetch();
+  //=======Requete Base donnée=======================================================================//
   $Prenom = htmlspecialchars($_POST['Prenom']);
   $Nom = htmlspecialchars($_POST['Nom']);
   $Ville = htmlspecialchars($_POST['Ville']);
@@ -18,8 +23,10 @@ if(isset($_POST['connection']))
   $Email = htmlspecialchars($_POST ['Email']);
   $Genre = htmlspecialchars($_POST ['Genre']);
   $Mdp = sha1($_POST ['Mdp']);
-  $Mdp2 = sha1($_POST ['Mdp2']);//
+  $Mdp2 = sha1($_POST ['Mdp2']);
+//===Initialisation des variables Utilisateurs (collaborateurs)=====================================================================================================================================//
 
+//===Signup de l'utilisateur=========================================================================================================//
   if( !empty($_POST['Prenom']) && 
       !empty($_POST['Nom']) && 
       !empty($_POST['Ville']) && 
@@ -30,6 +37,7 @@ if(isset($_POST['connection']))
   {
             
     $Prenomlength = strlen($Prenom);
+
     if($Prenomlength <= 50)
     {
       if(filter_var($Email, FILTER_VALIDATE_EMAIL))
@@ -46,8 +54,7 @@ if(isset($_POST['connection']))
               {                         //==Insertion du Client dans la Base de Donnée==//
                 $insertMbr = $mysqli->prepare("INSERT INTO collaborateurs (`Email`, `password`, `Ville`, `Nom`, `Prenom`, `Genre`) VALUES (?, ?, ?, ?, ?, ?)");
                 $insertMbr->bind_param('ssssss', $Email, $Mdp, $Ville, $Nom, $Prenom, $Genre);
-                $insertMbr->execute() or die('Error: '. mysqli_error() );
-                //$insertMbr->query() or die('Error: '. mysql_error() );
+                $insertMbr->execute() or die('Error: '. mysqli_error());
                 $erreur = "Votre compte à bien été créer !";
                 $_SESSION['comptecree'] = "Votre compte à bien était enregistrer";
                 /*================================================Redirection une fois l'insertion faite=================================//*/
@@ -90,7 +97,7 @@ if(isset($_POST['connection']))
 </head>
 
 <header class="page-header">
-<p>
+<p id="img">
     <img src="img/Albert.png" alt="Avatar" id="img">
 </p>
 </header>
@@ -158,12 +165,15 @@ if(isset($_POST['connection']))
             <input type="password" class="form-control" placeholder=" Confirmer le mot de passe" name='Mdp2' id='Mdp2' value="Mdp2">
           </div>
           <div class="col-7">
-                  <input type="text" class="form-control" placeholder="Genre"  name="Genre" value="<?php if(isset($Genre)) { echo $Genre; } ?>">
-          </div><br>
-          <div class="col-1">
-                <button type="submit" class="btn btn-primary" name="connection" value= "connection">Inscription</button>
-          </div>
+                  <select name="text" class="form-control" placeholder="Genre"  name="Genre" value="<?php if(isset($Genre)) { echo $Genre; } ?>">
+                      <option value="first">Mr</option> 
+                      <option value="second" selected>Mme</option>
+                      <option value="third">Autre</option> 
+          </div><br>  
     </table>
+    <div class="col-5">
+            <button type="submit" class="btn btn-primary" name="connection" value= "connection">Inscription</button>
+    </div>
 </form>
 <!-----------FIN DE FORMULAIRE------------------------------------------------------------------------------------------------------------------->
 
@@ -175,5 +185,26 @@ if(isset($erreur))
     echo '<font color= "red">'.$erreur.'</font>';
 }
 ?>
+<!-----------Message d'erreur------------------------------------------------------------------------------------------------------------------------>
+
+
+<div align="center">
+         <h2>Profil de <?php echo $userinfo['pseudo']; ?></h2>
+         <br /><br />
+         Pseudo = <?php echo $userinfo['pseudo']; ?>
+         <br />
+         Mail = <?php echo $userinfo['Email']; ?>
+         <br />
+         <?php
+         if(isset($_SESSION['id']) AND $userinfo['id'] == $_SESSION['id']) {
+         ?>
+         <br />
+         
+         <?php
+         }
+         ?>
+</div>   
+
+
 </body>
 </html>

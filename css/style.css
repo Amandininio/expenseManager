@@ -121,8 +121,13 @@ googleMap{
   border-radius: 8px;
 }
 
+#p{
+  margin-top: 71px; 
+}
+
 #img{
   float:left;
+  margin-top: 78px;
   width:50%;
   height:auto; 
   border-radius: 50%;
