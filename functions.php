@@ -35,7 +35,7 @@ function afficheTableau($data){
 //===================================================//
 function selectOptions($values,$selected=null){
     $html = '';
-    foreach($values as $key => $value){
+    foreach($values as $id => $value){
         if($selected == $value){
             $html .= '<option value="'.$value.'" selected>'.$value.'</option>';
         }else{

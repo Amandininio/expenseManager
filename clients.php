@@ -5,25 +5,25 @@ $mysqli = new mysqli("localhost", "root", "", "expensemanager");
 require_once ('model.php');
 require_once ('functions.php');
 //=====Condition de sécurité & de remplissage formulaire correct=============================================================================================================================================================================//
-if(isset($_POST['connection']))
+if(isset($_SESSION['connection']))
 {           
   echo "ok";
-  $Prenom = htmlspecialchars($_POST['Prenom']);
-  $Nom = htmlspecialchars($_POST['Nom']);
-  $Ville = htmlspecialchars($_POST['Ville']);
-  $Tel = htmlspecialchars($_POST['Tel']);
-  $Email = htmlspecialchars($_POST ['Email']);
-  //$Genre = htmlspecialchars ($_POST ['Genre']);
-  $Mdp = sha1($_POST ['Mdp']);
-  $Mdp2 = sha1($_POST ['Mdp2']);//
+  $Prenom = htmlspecialchars($_SESSION['Prenom']);
+  $Nom = htmlspecialchars($_SESSION['Nom']);
+  $Ville = htmlspecialchars($_SESSION['Ville']);
+  $Tel = htmlspecialchars($_SESSION['Tel']);
+  $Email = htmlspecialchars($_SESSION ['Email']);
+  //$Genre = htmlspecialchars ($_SESSION ['Genre']);
+  $Mdp = sha1($_SESSION ['Mdp']);
+  $Mdp2 = sha1($_SESSION ['Mdp2']);//
 
-  if(!empty($_POST['Prenom']) && 
-      !empty($_POST['Nom']) && 
-      !empty($_POST['Ville']) && 
-      !empty($_POST['Email']) && 
-      !empty($_POST['Mdp']) && 
-      !empty($_POST['Mdp2']) && 
-      !empty($_POST['Tel']))
+  if(!empty($_SESSION['Prenom']) && 
+      !empty($_SESSION['Nom']) && 
+      !empty($_SESSION['Ville']) && 
+      !empty($_SESSION['Email']) && 
+      !empty($_SESSION['Mdp']) && 
+      !empty($_SESSION['Mdp2']) && 
+      !empty($_SESSION['Tel']))
   {
             
     $Prenomlength = strlen($Prenom);
@@ -93,14 +93,14 @@ if(isset($_POST['connection']))
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Expense Manager</a>
+      <a class="navbar-brand" href="index.php">Expense Manager</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="index.php">Home</a></li>
       <li><a href="listerResa.php"> Réservation</a></li>
       <li><a href="update.php">Modifier réservation</a></li>
       <li><a href="clients.php"> Plan & Client</a></li>
-      <li><a href="profil.php"> Compte Utilisateur</a></li>
+      <li><a href="connection.php"> Compte Utilisateur</a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
   </div>

@@ -44,7 +44,8 @@ foreach ($vehicules as $vehicule){
 
 
   <header class>
-<nav class="navbar navbar-inverse">
+
+  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Expense Manager</a>
@@ -53,7 +54,7 @@ foreach ($vehicules as $vehicule){
       <li class="active"><a href="index.php">Home</a></li>
       <li><a href="listerResa.php"> Réservation</a></li>
       <li><a href="update.php">Modifier réservation</a></li>
-      <li><a href="clients.php"> Plan & Client</a></li>
+      <li><a href="clients.php" d> Plan & Client</a></li>
       <li><a href="connection.php"> Compte Utilisateur</a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
@@ -61,6 +62,16 @@ foreach ($vehicules as $vehicule){
 </nav>
 <input type="text" name="search" placeholder="Search..">
 
+
+<ul id="menu-v">
+                <img href="#" class="arrow">Kit Tools</img>
+                <ul>
+                    <li><a href="#">Eu tortor</a></li>
+                    <li><a href="#">Ultricies</a></li>
+                    <li><a href="#">Fermentum nunc</a></li>
+                </ul>
+            </li>  
+</ul>
 </header>
 <!------------------------Menu--------------------------------------->
 
@@ -96,8 +107,7 @@ foreach ($vehicules as $vehicule){
               <?php echo afficheTableau($vehiculesAdapte)?><br>
           <input type="submit" name="btnAfficherListe" value="Réservations" class=" btn btn-success" />
       
-    </fieldset>
-</form>
+
 </div>
 <!-----------------------Contenu----------------------------------------->
 
@@ -122,9 +132,10 @@ foreach ($vehicules as $vehicule){
               <label class="custom-file-label" for="inputGroupFile01">Importer </label>
             </div>
 <!-----------------------Choix du fichier a télécharger-------------------------------------------------------->
-        <button type="button" class="btn btn-success">Envoyer</button>
+        <button type="button" class="btn btn-success"value="btnCreate">Envoyer</button>
       </div>
     </div>
+</fieldset>
 </form>
 <!-------------------------Frais de déplacement---------------------------------------------->
 

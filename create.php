@@ -1,6 +1,9 @@
 <?php
+session_start();
 require_once ('model.php');
 require_once ('functions.php');
+$mysqli = new mysqli("localhost", "root", "", "expensemanager");
+
 
 
 $collaborateurs = readCollaborateurs($db);
@@ -12,9 +15,9 @@ foreach ($collaborateurs as $collaborateur){
         'Selection' => '<input type="radio"
                         name="selection"
                         value="'.$collaborateur['Genre'].' '.$collaborateur['Nom'].' '.$collaborateur['Prenom'].'"/>',
-        'Genre' => $collaborateur['Genre'],
-        'Nom' => $collaborateur['Nom'],
-        'Prenom' => $collaborateur['Prenom'],
+                        'Genre' => $collaborateur['Genre'],
+                        'Nom' => $collaborateur['Nom'],
+                        'Prenom' => $collaborateur['Prenom'],
     ];
 }
 
@@ -33,10 +36,10 @@ header('location:index.php');
 
 
 
-//$vehicule = readVehicule($db,$_GET['id']);
-//$id= $vehicule['Marque'];
+$vehicule = readVehicule($db, $_GET['id']);
+$id= $vehicule['Marque'];
 
-//$tblDate = explode('-',$tableauResa['dateResa']);
+//$tblDate = explode('-', $tableauResa['dateResa']);
 
 ?>
 
@@ -96,8 +99,7 @@ header('location:index.php');
     <div class="container">
     <input type="submit" name="btnUpdate" value="Modifier" class="btn btn-success" id="modif"/>
     <input type="submit" name="btnCreate" value="Créer" class= "btn btn-primary" id="creer"/>
-    </div>
-    
+    </div> 
 </form>
 </body>
 </html>

@@ -22,9 +22,9 @@ if(isset($_POST['btnUpdate'])) {
     header("location:update.php?idResa=$idResa");
 }
 
-/*if(isset($_POST['btnCreate'])){
+if(isset($_POST['btnCreate'])){
     header("location:create.php");
-}*/
+}
 
 if(isset($_POST['btnSupprimer'])) {
     $idResa = $_POST['idResa'];
@@ -94,7 +94,7 @@ if(isset($_POST['btnSupprimer'])) {
 <div class="block">
         <input type="submit" name ="btnSupprimer" class="btn btn-danger" value="Supprimer" />
         <input type="submit" name="btnUpdate" value="Modifier" class="btn btn-success" id="modif"/>
-        <input type="submit" name="btnUpdate" value="Creer" class= "btn btn-primary" id="creer"/>
+        <input type="submit" name="btnCreate" value="Creer" class= "btn btn-primary" id="creer"/>
 </div>
 </form>
 <!--------------------------------------------------------------->
