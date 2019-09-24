@@ -82,8 +82,8 @@ if(isset($_POST['connection'])) {
           <div class="col-7">
             <input type="password" class="form-control" placeholder="Mot de Passe" name='Mdp'id='Mdp' value="<?php if(isset($Mdp)) { echo $Mdp; } ?>">
           </div>
-            <br /><br />
-            <input type="submit" name="connection" value="connection !" class="btn btn-primary" />
+            <br/><br/>
+            <input type="submit" name="connection" value="connection !" class="btn btn-primary"/>
          </form>
          <?php
          if(isset($erreur)) {
