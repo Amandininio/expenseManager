@@ -22,9 +22,9 @@ if(isset($_POST['btnUpdate'])) {
     header("location:update.php?idResa=$idResa");
 }
 
-/*if(isset($_POST['btnCreate'])){
+if(isset($_POST['btnCreate'])){
     header("location:create.php");
-}*/
+}
 
 if(isset($_POST['btnSupprimer'])) {
     $idResa = $_POST['idResa'];
@@ -56,25 +56,34 @@ if(isset($_POST['btnSupprimer'])) {
 <!---------------------Application Expense Manager------------------------------------------>
 
 
-<header>
+<header class>
+
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="index.php">Expense Manager</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="index.php">Home</a></li>
-      <li><a href="listerResa.php">Réservation</a></li>
-     
-      <li><a href="clients.php"> Plan & Client</a></li>
-    </ul>
-    <!--<button class="btn btn-primary navbar-btn"></button>-->
+<div class="container-fluid">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="connection.php">Expense Manager</a>
   </div>
-</nav>
-<input type="text" name="search" placeholder="Search..">
-<div class="container">
+  <ul class="nav navbar-nav">
+    <li class="active"><a href="connection.php">Home</a></li>
+    <li><a href="connection.php"> Réservation</a></li>
+    <li><a href="connection.php">Modifier réservation</a></li>
+    <li><a href="connection.php"> Plan & Client</a></li>
+    <li><a href="connection.php"> Compte Utilisateur</a></li>
+  </ul>
+  <!--<button class="btn btn-primary navbar-btn"></button>-->
 </div>
+<li>
+  <a href="connection.php">
+    <span class="glyphicon glyphicon-user"></span>Inscription </a></li>
+    <li>
+      <a href="deconnection.php">
+        <span class="glyphicon glyphicon-log-in"></span>Déconnection</a></li>
+    <input type="text" name="search" placeholder="Search.." class="form-control">
+</nav>
+
+    
 </header>
+
 
 
 <!--------------------------------------------------------------->
@@ -94,7 +103,7 @@ if(isset($_POST['btnSupprimer'])) {
 <div class="block">
         <input type="submit" name ="btnSupprimer" class="btn btn-danger" value="Supprimer" />
         <input type="submit" name="btnUpdate" value="Modifier" class="btn btn-success" id="modif"/>
-        <input type="submit" name="btnUpdate" value="Creer" class= "btn btn-primary" id="creer"/>
+        <input type="submit" name="btnCreate" value="Creer" class= "btn btn-primary" id="creer"/>
 </div>
 </form>
 <!--------------------------------------------------------------->

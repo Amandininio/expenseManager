@@ -38,33 +38,37 @@ foreach ($vehicules as $vehicule){
   </head>
   
 <!-----------------Logo---------------------------------------->
-    <p class="padding"> 
-      <img src="img/logo1.jfif" alt="" class="responsive">   
+   
+
+ 
+<body class="fluid">
+ <p> 
+      <img src="img/logo1.jpg" alt="" class="btn btn-float" id= "logo">   
   </p>
+ <header class>
 
-
-  <header class>
-<nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Expense Manager</a>
+      <a class="navbar-brand" href="connection.php">Expense Manager</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="index.php">Home</a></li>
-      <li><a href="listerResa.php"> Réservation</a></li>
-      <li><a href="update.php">Modifier réservation</a></li>
-      <li><a href="clients.php"> Plan & Client</a></li>
+      <li class="active"><a href="connection.php">Home</a></li>
+      <li><a href="connection.php"> Réservation</a></li>
+      <li><a href="connection.php">Modifier réservation</a></li>
+      <li><a href="connection.php" d> Plan & Client</a></li>
       <li><a href="connection.php"> Compte Utilisateur</a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
   </div>
+      <li><a href="connection.php"><span class="glyphicon glyphicon-user"></span>Inscription </a></li>
+      <li><a href="deconnection.php"><span class="glyphicon glyphicon-log-in"></span>Déconnection</a></li>
+      <li><a href="https://pablotheflamingo.com"><span class="glyphicon glyphicon-user"></span>Special </a></li>
 </nav>
-<input type="text" name="search" placeholder="Search..">
-
 </header>
 <!------------------------Menu--------------------------------------->
 
-<body class="container mb-12">
+
 <h1 class="container">Gestion de mission</h1>
 <div class="container">
       <script>
@@ -96,8 +100,7 @@ foreach ($vehicules as $vehicule){
               <?php echo afficheTableau($vehiculesAdapte)?><br>
           <input type="submit" name="btnAfficherListe" value="Réservations" class=" btn btn-success" />
       
-    </fieldset>
-</form>
+
 </div>
 <!-----------------------Contenu----------------------------------------->
 
@@ -122,9 +125,10 @@ foreach ($vehicules as $vehicule){
               <label class="custom-file-label" for="inputGroupFile01">Importer </label>
             </div>
 <!-----------------------Choix du fichier a télécharger-------------------------------------------------------->
-        <button type="button" class="btn btn-success">Envoyer</button>
+        <button type="button" class="btn btn-success"value="btnCreate">Envoyer</button>
       </div>
     </div>
+</fieldset>
 </form>
 <!-------------------------Frais de déplacement---------------------------------------------->
 

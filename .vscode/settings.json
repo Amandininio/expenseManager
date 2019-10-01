@@ -1,0 +1,22 @@
+{
+    "sqltools.connections": [
+        {
+            "askForPassword": false,
+            "database": "expenseManager",
+            "dialect": "MySQL",
+            "name": "LocationCarExpManager",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        }
+    ],
+    "cSpell.words": [
+        "Numéro",
+        "allowfullscreen",
+        "d'inscription",
+        "fois",
+        "l'insertion",
+        "remplies",
+        "varchar"
+    ]
+}

@@ -1,60 +1,58 @@
-<?php
-//$db = new PDO('mysql:host=localhost;dbname=expensemanager;charset=utf8','root','');
-$mysqli = new mysqli("localhost", "root", "", "expensemanager");
-
-require_once ('model.php');
-require_once ('functions.php');
-//=====Condition de sécurité & de remplissage formulaire correct=============================================================================================================================================================================//
-if(isset($_POST['connection']))
-{           
-  echo "ok";
-  $Prenom = htmlspecialchars($_POST['Prenom']);
-  $Nom = htmlspecialchars($_POST['Nom']);
-  $Ville = htmlspecialchars($_POST['Ville']);
-  $Tel = htmlspecialchars($_POST['Tel']);
-  $Email = htmlspecialchars($_POST ['Email']);
-  //$Genre = htmlspecialchars ($_POST ['Genre']);
-  $Mdp = sha1($_POST ['Mdp']);
-  $Mdp2 = sha1($_POST ['Mdp2']);//
-
-  if(!empty($_POST['Prenom']) && 
-      !empty($_POST['Nom']) && 
-      !empty($_POST['Ville']) && 
-      !empty($_POST['Email']) && 
-      !empty($_POST['Mdp']) && 
-      !empty($_POST['Mdp2']) && 
-      !empty($_POST['Tel']))
+<? php
+  require_once('model.php');
+  require_once('functions.php');
+//=====Condition de security & de remplissage formulaire correct=============================================================================================================================================================================//
+  if(isset($_SESSION['connection']));
   {
-            
+  echo "ok";
+  $Prenom = htmlspecialchars($_SESSION['Prenom']);
+  $Nom = htmlspecialchars($_SESSION['Nom']);
+  $Ville = htmlspecialchars($_SESSION['Ville']);
+  $Tel = htmlspecialchars($_SESSION['Tel']);
+  $Email = htmlspecialchars($_SESSION ['Email']);
+  $Genre = htmlspecialchars($_SESSION ['Genre']);
+  $Mdp = sha1($_SESSION ['Mdp']);
+  $Mdp2 = sha1($_SESSION ['Mdp2']);
+
+  if(!empty($_SESSION['Prenom']) &&
+      !empty($_SESSION['Nom']) &&
+      !empty($_SESSION['Ville']) &&
+      !empty($_SESSION['Email']) &&
+      !empty($_SESSION['Mdp']) &&
+      !empty($_SESSION['Mdp2']) &&
+      !empty($_SESSION['Tel']));
+  {
+
     $Prenomlength = strlen($Prenom);
-    if($Prenomlength <= 50)
+    if($Prenomlength <= 50);
     {
-      if(filter_var($Email, FILTER_VALIDATE_EMAIL))
+      if(filter_var($Email, FILTER_VALIDATE_EMAIL));
       {
         $reqmail = $mysqli->prepare("SELECT * FROM clients WHERE Email = ?");
         $reqmail->bind_param('s', $Email);
         $reqmail->execute();
         $res = $reqmail->get_result();
         $mailexist = $res->num_rows;
-        if($mailexist == 0)
+        if($mailexist == 0);
         {
-            if(true){
-              if($Mdp ==  $Mdp2)
+            if(true);
+            {
+              if($Mdp == $Mdp2);
               {                         //==Insertion du Client dans la Base de Donnée==//
                 $insertMbr = $mysqli->prepare("INSERT INTO clients (`Email`, `password`, `Ville`, `Nom`, `Prenom`, `Tel`) VALUES (?, ?, ?, ?, ?, ?)");
                 $insertMbr->bind_param('sssssi', $Email, $Mdp, $Ville, $Nom, $Prenom, $Tel);
-                $insertMbr->execute() or die('Error: '. mysqli_error() );
-                //$insertMbr->query() or die('Error: '. mysql_error() );
+                $insertMbr->execute() or die('Error: '.mysqli_error(''));
+                $insertMbr->query() or die ('Error: '. mysql_error(''));
                 $erreur = "Votre compte à bien été créer !";
                 $_SESSION['comptecree'] = "Votre compte à bien était enregistrer";
-                /*================================================Redirection une fois l'insertion faite=================================//*/
+                /*================================================Redirection une fois l'insertion faits=================================//*/
                 header('location: index.php');
-              } 
+              }
               else
               {
                 $erreur = "Les mot de passe ne sont pas identiques ";
               }
-            }          
+            }
               else
             {
               $erreur = "Ton Prénom est trop long, on n'est pas des Russe !! ";
@@ -62,7 +60,7 @@ if(isset($_POST['connection']))
         }
           else
         {
-          $erreur = 'Tous les champs doivent être remplies !!'; 
+          $erreur = 'Tous les champs doivent être remplies !!';
         }
       }
     }
@@ -75,11 +73,11 @@ if(isset($_POST['connection']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
        <!-- Bootstrap CSS -->
        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
@@ -93,14 +91,14 @@ if(isset($_POST['connection']))
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Expense Manager</a>
+      <a class="navbar-brand" href="index.php">Expense Manager</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="index.php">Home</a></li>
       <li><a href="listerResa.php"> Réservation</a></li>
       <li><a href="update.php">Modifier réservation</a></li>
       <li><a href="clients.php"> Plan & Client</a></li>
-      <li><a href="profil.php"> Compte Utilisateur</a></li>
+      <li><a href="connection.php"> Compte Utilisateur</a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
   </div>
@@ -108,12 +106,79 @@ if(isset($_POST['connection']))
 <input class="autofocus" type="text" name="search" placeholder="Search">
 </header>
 <!--------------------------------------------------------Header------------------------------------------------------------------------>
+<?php if(isset($_POST['btnUpdate'])); {
+    $idResa = $_POST['idResa'];
+    header("location:update.php?idResa=$idResa");
+}
 
+if(isset($_POST['btnCreate'])); {
+    header("location:create.php");
+}
+
+if(isset($_POST['forminscription']));
+{
+    $pseudo = htmlspecialchars($_POST['pseudo']);
+    $Email = htmlspecialchars($_POST['Email']);
+    $Email2 = htmlspecialchars($_POST['Email2']);
+    $mdp = sha1($_POST['Mdp']);
+    $mdp2 = sha1($_POST['Mdp2']);
+      if(!empty($_POST['pseudo']) AND !empty($_POST['Email']) AND !empty($_POST['Email2']) AND !empty($_POST['Mdp']) AND !empty($_POST['Mdp2']));
+       {
+                $pseudolength = strlen($pseudo);
+      if($pseudolength <= 255); {
+
+         if($Email == $Email2); {
+
+            if(filter_var($Email)); {
+
+               $reqEmail = $db->prepare("SELECT * FROM clients WHERE Email = ?");
+               $reqEmail->execute(array($Email));
+               $Emailexist = $reqEmail->rowCount();
+
+               if($Emailexist == 0); {
+
+                  if($mdp == $mdp2); {
+
+                     $insertmbr = $db->prepare("INSERT INTO clients(pseudo, Email, Mdp) VALUES(?, ?, ?)");
+                     $insertmbr->execute(array($pseudo, $Email, $mdp));
+                     $erreur = "Votre compte a bien été créé ! <a href=\"connection.php\">Me connecter</a>";
+                  } 
+                  else 
+                  {
+                     $erreur = "Vos mots de passes ne correspondent pas !";
+                  }
+               } 
+               else 
+               {
+                  $erreur = "Adresse mail déjà utilisée !";
+               }
+            } 
+            else 
+            {
+               $erreur = "Votre adresse mail n'est pas valide !";
+            }
+         } 
+         else 
+         {
+            $erreur = "Vos adresses mail ne correspondent pas !";
+         }
+      } 
+      else 
+      {
+         $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
+      }
+   } 
+   else 
+   {
+      $erreur = "Tous les champs doivent être complétés !";
+   }
+}
+?>
 
 <body>
 <h1>Page Clients</h1>
 <div id="googleMap" style="width:100%;height:azuto;">
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11614.742703174841!2d-0.36542149999999995!3d43.299903799999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1567258368456!5m2!1sfr!2sfr" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11614.742703174841!2d-0.36542149999999995!3d43.299903799999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1567258368456!5m2!1sfr!2sfr" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="">
 </iframe>
 </div>
 
@@ -143,7 +208,7 @@ if(isset($_POST['connection']))
                   <input type="number" class="form-control" placeholder="Numéro de téléphone"  name="Tel" value="<?php if(isset($Tel)) { echo $Tel; } ?>">
           </div><br>
           <div class="col-1">
-                <button type="submit" class="btn btn-primary" name="connection" value= "connection">Inscription</button>
+                <button type="submit" class="btn btn-primary" name="forminscription" value= "connection">Inscription</button>
           </div>
     </table>
 </form>
