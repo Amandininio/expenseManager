@@ -39,7 +39,7 @@ header('location:index.php');
 $vehicule = readVehicule($db, $_GET['id']);
 $id= $vehicule['Marque'];
 
-//$tblDate = explode('-', $tableauResa['dateResa']);
+//*$tblDate = explode('-', $tableauResa['dateResa']);
 
 ?>
 
@@ -78,28 +78,30 @@ $id= $vehicule['Marque'];
 </header>
 
 
-<body>
+<body class="container-fluid">
 <form action="" method="post">
-<h1>Entrer le collaborateur et la date de réservation</h1>
+<h1>Selectionner le collaborateur et la date de réservation</h1>
 <h1>pour le véhicule immatriculé :<h1> <?php 
-                                            if(isset ($_GET['id'] ))
+                                            if(isset($_GET['id'] ));
                                             {
                                                 echo $_GET['id'];
                                             }
                                    ?> </h1>
-<p>Choix du collaborateur : </p>
+<div class="container-fluid">
+<p >Choix du collaborateur : </p>
 
-    <?php echo afficheTableau($collaborateursAdapte); readVehicule($db,$_GET['id'])?>
+    <?php echo afficheTableau($collaborateursAdapte); readVehicule($db,$_GET['id']);?>
     <p>Date de reservation :
         <select name="jour"><?php echo selectOptionsNumeric(1,31,$dateResa[2])?></select>
         <select name="mois"><?php echo selectOptionsNumeric(1,12,$dateResa[1])?></select>
         <select name="annee"><?php echo selectOptionsNumeric(2019,2023,$dateResa[0])?></select><br/>
     </p>
 
-    <div class="container">
+    <div class="container-flex">
     <input type="submit" name="btnUpdate" value="Modifier" class="btn btn-success" id="modif"/>
     <input type="submit" name="btnCreate" value="Créer" class= "btn btn-primary" id="creer"/>
-    </div> 
+    </div>
+</div>
 </form>
 </body>
 </html>

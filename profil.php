@@ -1,8 +1,15 @@
 <?php
 $db = new PDO('mysql:host=127.0.0.1;dbname=expensemanager', 'root', '');
-require_once 'functions.php';
-require_once 'model.php';
+require_once ('functions.php');
+require_once ('model.php');
 $tableauResas = readtableauResas($db);
+
+if(isset($_GET['id']) AND $_GET['id'] > 0) {
+   $getid = intval($_GET['id']);
+   $requser = $bdd->prepare('SELECT * FROM collaborateurs WHERE id = ?');
+   $requser->execute(array($getid));
+   $userinfo = $requser->fetch();
+}
 
 // Adapte les données pour l'affichage
 $tableauResaAdapte = [];
@@ -101,7 +108,7 @@ if(isset($_POST['forminscription'])) {
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Expense Manager</a>
+      <a class="navbar-brand" href="index.php">Expense Manager</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="index.php">Home</a></li>
@@ -119,7 +126,7 @@ if(isset($_POST['forminscription'])) {
 <input type="text" name="search" placeholder="Search..">
 
    <body>
-      <div align="center">
+      <div>
          <img src="img/Albert.png" alt="Avatar" id="img">
          <h2>Inscription</h2>
          <br /><br />
@@ -185,18 +192,26 @@ if(isset($_POST['forminscription'])) {
 
 
 <body class="container">
-<h3 class="padding">Profil</h3></br></br></br></br></br></br></br></br>
+<h3 class="padding">Profil</h3></br>
 <!----------------------------------------------------------------------------------------------------------------------------------->
 
 <!----------------------------------------------------------------------------------------------------------------------------------->
-<div class="container mb-6">
+<form method="post" action="#" class="padding" >
+  <div class="container mb-12">
     <?php echo afficheTableau($tableauResaAdapte) ?>
-    <div class="block">
+  </div>
+<!--------------------------------------------------------------->
+
+<div class="block">
+        <input type="submit" name ="btnSupprimer" class="btn btn-danger" value="Supprimer" />
         <input type="submit" name="btnUpdate" value="Modifier" class="btn btn-success" id="modif"/>
         <input type="submit" name="btnCreate" value="Creer" class= "btn btn-primary" id="creer"/>
 </div>
+</form>
 </div>
-<div class="container-float mb-12"> 
+</div>
+<div class="container-float mb-12">
+   
    <?php
             $collaborateurs = readCollaborateurs($db);
 
