@@ -104,7 +104,7 @@ if(isset($_POST['forminscription'])) {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <title>Document</title>
 </head>
-<header >
+<header>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -118,12 +118,14 @@ if(isset($_POST['forminscription'])) {
       <li><a href="connection.php"> Compte Utilisateur</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="connection.php"><span class="glyphicon glyphicon-user"></span>Edition Profil</a></li>
+      <li><a href="deconnection.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
 </nav>
 <input type="text" name="search" placeholder="Search..">
+</header>
+
 
    <body>
       <div>
@@ -187,10 +189,8 @@ if(isset($_POST['forminscription'])) {
          }
 ?>
 </div>
-</header>
+
 <!------------------------------------------------------------------------>
-
-
 <body class="container">
 <h3 class="padding">Profil</h3></br>
 <!----------------------------------------------------------------------------------------------------------------------------------->
@@ -246,7 +246,7 @@ foreach($resultName as $name){
 </div>
 <!--------------------------------------------------------------->
 
-
+<!--------------------------------------------------------------->
 <?php
 if(isset($_SESSION['jour'])) {
          $annee = $_SESSION['annee'];

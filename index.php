@@ -126,6 +126,7 @@ foreach ($vehicules as $vehicule){
 <!-----------------------Choix du fichier a télécharger-------------------------------------------------------->
         <button type="button" class="btn btn-success"value="btnCreate">Envoyer</button>
       </div>
+      </div>
     </div>
 </fieldset>
 </form>
