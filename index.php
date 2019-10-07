@@ -20,7 +20,6 @@ foreach ($vehicules as $vehicule){
 }
 ?>
 
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -36,16 +35,15 @@ foreach ($vehicules as $vehicule){
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <title>Expense Manager</title>
   </head>
-  
-<!-----------------Logo---------------------------------------->
-   
 
- 
+<!-----------------Logo---------------------------------------->
+
 <body class="fluid">
- <p> 
+ <p>
       <img src="img/logo1.jpg" alt="" class="btn btn-float" id= "logo">   
   </p>
- <header class>
+<header class>
+<header class>
 
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -56,15 +54,17 @@ foreach ($vehicules as $vehicule){
       <li class="active"><a href="connection.php">Home</a></li>
       <li><a href="connection.php"> Réservation</a></li>
       <li><a href="connection.php">Modifier réservation</a></li>
-      <li><a href="connection.php" d> Plan & Client</a></li>
+      <li><a href="connection.php"> Plan & Client</a></li>
       <li><a href="connection.php"> Compte Utilisateur</a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
   </div>
       <li><a href="connection.php"><span class="glyphicon glyphicon-user"></span>Inscription </a></li>
-      <li><a href="deconnection.php"><span class="glyphicon glyphicon-log-in"></span>Déconnection</a></li>
+      <li><a href="deconnection.php"><span class="glyphicon glyphicon-log-out"></span>Déconnection</a></li>
       <li><a href="https://pablotheflamingo.com"><span class="glyphicon glyphicon-user"></span>Special </a></li>
 </nav>
+<input type="text" name="search" placeholder="Search..">
+
 </header>
 <!------------------------Menu--------------------------------------->
 
@@ -73,10 +73,10 @@ foreach ($vehicules as $vehicule){
 <div class="container">
       <script>
               var aujourdhui = new Date(); 
-              var annee = aujourdhui.getFullYear(); // retourne le millésime
-              var mois =aujourdhui.getMonth()+1; // date.getMonth retourne un entier entre 0 et 11 donc il faut ajouter 1
-              var jour = aujourdhui.getDate(); // retourne le jour (1à 31)
-              var joursemaine = aujourdhui.getDay() ; // retourne un entier compris entre 0 et 6 (0 pour dimanche)
+              var annee = aujourdhui.getFullYear(); // returned le millesimal
+              var mois =aujourdhui.getMonth()+1; // date.getMonth returned un entire entre 0 et 11 dona il faut ajouter 1
+              var jour = aujourdhui.getDate(); // returned le jour (1à 31)
+              var joursemaine = aujourdhui.getDay() ; // returned un entier comprise entre 0 et 6 (0 pour dimanche)
               var tab_jour=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
               document.write('Nous sommes le : ' +  tab_jour[joursemaine] + ' ' + jour + '/' + mois + '/' + annee) ;
       </script><br>
@@ -99,13 +99,12 @@ foreach ($vehicules as $vehicule){
     <fieldset>
               <?php echo afficheTableau($vehiculesAdapte)?><br>
           <input type="submit" name="btnAfficherListe" value="Réservations" class=" btn btn-success" />
-      
 
 </div>
-<!-----------------------Contenu----------------------------------------->
+<!-----------------------Contend----------------------------------------->
 
 
-<!-------------------------Frais de déplacement---------------------------------------------->
+<!-------------------------Frais de deplacements---------------------------------------------->
 <div>
   <h2 id="note">Notez toutes vos charges ici !!</h2>
   <div class="grid-group mb-12">
@@ -113,7 +112,7 @@ foreach ($vehicules as $vehicule){
   </div>
 </div>
 
-<!-----------------------Choix du fichier a télécharger-------------------------------------------------------->
+<!-----------------------Chios du fichier a télécharger-------------------------------------------------------->
       <div class="padding">
         <div class="input-group mb-2" id= "rechercheDoc">
             <div class="input-group-prepend">

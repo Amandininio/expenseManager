@@ -3,13 +3,12 @@
    require_once('functions.php');
    $db = new PDO('mysql:host=127.0.0.1;dbname=expensemanager', 'root', '');
 
-
 if(isset($_POST['connection'])) {
    $Email = htmlspecialchars($_SESSION['Email']);
    $Mdp = sha1($_SESSION['Mdp']);
-   if(!empty($Email) AND !empty($Mdp))
-   {
-$requser = $db->prepare("SELECT * FROM collaborateurs WHERE Email = ? AND Mdp = ?");
+   
+   if(!empty($Email) AND !empty($Mdp)) {
+      $requser = $db->prepare("SELECT * FROM collaborateurs WHERE Email = ? AND Mdp = ?");
       $requser->execute(array($Email, $Mdp));
       $userexist = $requser->rowCount();
 
@@ -40,15 +39,16 @@ $requser = $db->prepare("SELECT * FROM collaborateurs WHERE Email = ? AND Mdp = 
    }
 }
 ?>
-<html><head>
-   <title>TUTO PHP</title>
-   <meta charset="utf-8">
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   <link rel="stylesheet" href="css/style.css">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
+<html>
+   <head>
+      <title>Connection </title>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   </head>
 
 <header  class="">
 <nav class="navbar navbar-inverse">
@@ -57,15 +57,16 @@ $requser = $db->prepare("SELECT * FROM collaborateurs WHERE Email = ? AND Mdp = 
       <a class="navbar-brand" href="index.php">Expense Manager</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="connection.php">Home</a></li>
-      <li><a href="connection.php"> Réservation</a></li>
-      <li><a href="connection.php">Modifier réservation</a></li>
-      <li><a href="connection.php"> Plan & Client</a></li>
+      <li class="active"><a href="index.php">Home</a></li>
+      <li><a href="listerResa.php"> Réservation</a></li>
+      <li><a href="update.php">Modifier réservation</a></li>
+      <li><a href="clients.php"> Plan & Client</a></li>
       <li><a href="connection.php"> Compte Utilisateur</a></li>
     </ul>
-   
+    <!--<button class="btn btn-primary navbar-btn"></button>-->
   </div>
 </nav>
+<input class="autofocus" type="text" name="search" placeholder="Search">
 </header>
 
 
@@ -82,8 +83,8 @@ $requser = $db->prepare("SELECT * FROM collaborateurs WHERE Email = ? AND Mdp = 
             <?php 
             if(isset($Mdp)) {echo $Mdp;}?>">
           </div>
-            <br /><br />
-            <input type="submit" name="connection" value="connection !" class="btn btn-primary" />
+            <br/><br/>
+            <input type="submit" name="connection" value="connection !" class="btn btn-primary"/>
          </form>
          <?php
          if(isset($erreur)) {

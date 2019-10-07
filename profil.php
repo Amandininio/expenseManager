@@ -1,87 +1,84 @@
 <?php
 $db = new PDO('mysql:host=127.0.0.1;dbname=expensemanager', 'root', '');
-
 require_once 'functions.php';
 require_once 'model.php';
 $tableauResas = readtableauResas($db);
 
-// Adapte les données pour l'affichage//
+// Adapte les données pour l'affichage
 $tableauResaAdapte = [];
 foreach ($tableauResas as $tableauResa){
     $tableauResaAdapte[] = [
         'Sélection' => '<input type="radio" name="idResa" value="'.$tableauResa['idResa'].'"/>',
         'Date' => $tableauResa['dateResa'],
-        'Immatriculation' => $vehicule['Immatriculation'],
+        //'Immatriculation' => $vehicule['Immatriculation'],
         'Collaborateur' => $tableauResa['collaboResa'],
         'Véhicule' => $tableauResa['vehiculeResa'],
     ];
 }
 
-if(isset($_POST['btnUpdate'])); {
+if(isset($_POST['btnUpdate'])) {
     $idResa = $_POST['idResa'];
     header("location:update.php?idResa=$idResa");
 }
 
-if(isset($_POST['btnCreate'])); {
+if(isset($_POST['btnCreate'])) {
     header("location:create.php");
 }
 
-if(isset($_POST['forminscription'])); {
+if(isset($_POST['forminscription'])) {
    
-            $pseudo = htmlspecialchars($_POST['pseudo']);
-            $Email = htmlspecialchars($_POST['Email']);
-            $Email2 = htmlspecialchars($_POST['Email2']);
-            $mdp = sha1($_POST['Mdp']);
-            $mdp2 = sha1($_POST['Mdp2']);
-               if(!empty($_POST['pseudo']) AND !empty($_POST['Email']) AND !empty($_POST['Email2']) AND !empty($_POST['Mdp']) AND !empty($_POST['Mdp2'])); {
-                  $pseudolength = strlen($pseudo);
+   $pseudo = htmlspecialchars($_POST['pseudo']);
+   $Email = htmlspecialchars($_POST['Email']);
+   $Email2 = htmlspecialchars($_POST['Email2']);
+   $mdp = sha1($_POST['Mdp']);
+   $mdp2 = sha1($_POST['Mdp2']);
+   if(!empty($_POST['pseudo']) AND !empty($_POST['Email']) AND !empty($_POST['Email2']) AND !empty($_POST['Mdp']) AND !empty($_POST['Mdp2'])) {
+      $pseudolength = strlen($pseudo);
       if($pseudolength <= 255) {
 
          if($Email == $Email2) {
 
             if(filter_var($Email)) {
 
-                                                $reqEmail = $db->prepare("SELECT * FROM collaborateurs WHERE Email = ?");
-                                                $reqEmail->execute(array($Email));
-                                                $Emailexist = $reqEmail->rowCount();
+               $reqEmail = $db->prepare("SELECT * FROM collaborateurs WHERE Email = ?");
+               $reqEmail->execute(array($Email));
+               $Emailexist = $reqEmail->rowCount();
 
-               if($Emailexist == 0)
-               {
+               if($Emailexist == 0) {
 
                   if($mdp == $mdp2) {
 
-                     $insertmbr = $db->prepare("INSERT INTO collaborateurs(pseudo, Email, Mdp) VALUES(?, ?, ?) ");
+                     $insertmbr = $db->prepare("INSERT INTO collaborateurs(pseudo, Email, Mdp) VALUES(?, ?, ?)");
                      $insertmbr->execute(array($pseudo, $Email, $mdp));
-                     $erreur = "Votre compte a bien été créé ! <a href='\connection.php\'>Me connecter </a>";
+                     $erreur = "Votre compte a bien été créé ! <a href=\"connection.php\">Me connecter</a>";
                   } 
                   else 
                   {
                      $erreur = "Vos mots de passes ne correspondent pas !";
                   }
-               
-               }
-               else
+               } 
+               else 
                {
                   $erreur = "Adresse mail déjà utilisée !";
                }
-            }
-            else
+            } 
+            else 
             {
                $erreur = "Votre adresse mail n'est pas valide !";
             }
-         }
-         else
+         } 
+         else 
          {
             $erreur = "Vos adresses mail ne correspondent pas !";
          }
-      }
-      else
+      } 
+      else 
       {
          $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
       }
-      }
-      else
-      {
+   } 
+   else 
+   {
       $erreur = "Tous les champs doivent être complétés !";
    }
 }
@@ -100,31 +97,27 @@ if(isset($_POST['forminscription'])); {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <title>Document</title>
 </head>
-
-<!------------------------------------------------------------------------>
-<header class>
+<header >
 <nav class="navbar navbar-inverse">
-<div class="container-fluid">
-  <div class="navbar-header">
-    <a class="navbar-brand" href="connection.php">Expense Manager</a>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Expense Manager</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="index.php">Home</a></li>
+      <li><a href="listerResa.php"> Réservation</a></li>
+      <li><a href="update.php">Modifier réservation</a></li>
+      <li><a href="clients.php"> Plan & Client</a></li>
+      <li><a href="connection.php"> Compte Utilisateur</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
   </div>
-  <ul class="nav navbar-nav">
-    <li class="active"><a href="connection.php">Home</a></li>
-    <li><a href="connection.php"> Réservation</a></li>
-    <li><a href="listResa.php">Modifier réservation</a></li>
-    <li><a href="clients.php" d> Plan & Client</a></li>
-    <li><a href="connection.php"> Compte Utilisateur</a></li>
-  </ul>
-  <!--<button class="btn btn-primary navbar-btn"></button>-->
-</div>
-<li><a href="connection.php"><span class="glyphicon glyphicon-user"></span>Inscription </a></li>
-    <li><a href="deconnection.php"><span class="glyphicon glyphicon-log-in"></span>Connection</a></li>
 </nav>
-</header>
-<!------------------------------------------------------------------------>
+<input type="text" name="search" placeholder="Search..">
 
-
-<!------------------------------------------------------------------------>
    <body>
       <div align="center">
          <img src="img/Albert.png" alt="Avatar" id="img">
@@ -184,10 +177,14 @@ if(isset($_POST['forminscription'])); {
 <?php
    if(isset($erreur)) {
             echo '<font color="red">'.$erreur."</font>";
-                      }
+         }
 ?>
-      </div>
+</div>
+</header>
+<!------------------------------------------------------------------------>
 
+
+<body class="container">
 <h3 class="padding">Profil</h3></br></br></br></br></br></br></br></br>
 <!----------------------------------------------------------------------------------------------------------------------------------->
 
@@ -195,29 +192,28 @@ if(isset($_POST['forminscription'])); {
 <div class="container mb-6">
     <?php echo afficheTableau($tableauResaAdapte) ?>
     <div class="block">
-        <input type="submit" name ="btnSupprimer" class="btn btn-danger" value="Supprimer" />
         <input type="submit" name="btnUpdate" value="Modifier" class="btn btn-success" id="modif"/>
         <input type="submit" name="btnCreate" value="Creer" class= "btn btn-primary" id="creer"/>
 </div>
 </div>
 <div class="container-float mb-12"> 
-<?php
+   <?php
             $collaborateurs = readCollaborateurs($db);
 
  //Adapte les données pour l'affichage
-$collaborateursAdapte = [];
-foreach($collaborateurs as $collaborateur){
-    $collaborateursAdapte[] = [
-        'Selection' => '<input type="radio"
+            $collaborateursAdapte = [];
+               foreach($collaborateurs as $collaborateur){
+            $collaborateursAdapte[] = [
+            'Selection' => '<input type="radio"
                         name="selection"
-                        value ="'.$collaborateur['Genre'].' '.$collaborateur['Nom'].' '.$collaborateur['Prenom'].'"/>',
-                       'Genre' => $collaborateur['Genre'],
-                       'Nom' => $collaborateur['Nom'],
-                       'Prenom' => $collaborateur['Prenom'],
-    ];
-}
+                        value="'/*.$collaborateur['Genre'].' '*/.$collaborateur['Nom'].' '.$collaborateur['Prenom'].'"/>',
+                     //'Genre' => $collaborateur['Genre'],
+                        'Nom' => $collaborateur['Nom'],
+                        'Prenom' => $collaborateur['Prenom'],
+               ];
+            }
 
-if(isset($_SESSION['jour'])) {
+            if(isset($_SESSION['jour'])) {
          $annee = $_SESSION['annee'];
          $mois= $_SESSION["mois"];
          $jour= $_SESSION["jour"];
@@ -225,8 +221,7 @@ if(isset($_SESSION['jour'])) {
          $idCollabo = $_SESSION['selection'];
 
     ajoutReservation($db, $annee, $mois, $jour, $idVehicule, $idCollabo);
-
-header ('location:index.php');
+   header('location:index.php');
 }
 $resultName=  afficherListeCollaborateurs($collaborateurs);
 foreach($resultName as $name){
@@ -237,13 +232,21 @@ foreach($resultName as $name){
 <!--------------------------------------------------------------->
 
 
-
-
-<!-----------Message d'erreur------------------------------------------------------------------------------------------------------------------------>
 <?php
-if(isset($erreur));
-{
-    echo '<font color= "red">'.$erreur.'</font>';
+if(isset($_SESSION['jour'])) {
+         $annee = $_SESSION['annee'];
+         $mois= $_SESSION["mois"];
+         $jour= $_SESSION["jour"];
+         $idVehicule = $_GET["id"];
+         $idCollabo = $_SESSION['selection'];
+
+    ajoutReservation($db, $annee, $mois, $jour, $idVehicule, $idCollabo);
+
+header('location:index.php');
+}
+$resultName=  afficherListeCollaborateurs($collaborateurs);
+foreach($resultName as $name){
+    echo $name."<br>";
 }
 ?>
    </body>

@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once ('model.php');
-require_once ('functions.php');
+require_once('model.php');
+require_once('functions.php');
 $mysqli = new mysqli("localhost", "root", "", "expensemanager");
 
 
@@ -82,10 +82,10 @@ $id= $vehicule['Marque'];
 <form action="" method="post">
 <h1>Entrer le collaborateur et la date de réservation</h1>
 <h1>pour le véhicule immatriculé :<h1> <?php 
-                                            if(isset($_GET['id'])){
+                                            if(isset ($_GET['id'] ))
+                                            {
                                                 echo $_GET['id'];
                                             }
-                                            
                                    ?> </h1>
 <p>Choix du collaborateur : </p>
 

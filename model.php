@@ -1,7 +1,8 @@
 <?php
 $db = new PDO('mysql:host=localhost; dbname=expensemanager; charset=utf8', 'root', '');
 
-function readVehicules( $db ) {
+function readVehicules( $db )
+{
     $sql = "SELECT * FROM vehicules";
     $resultats = $db->query($sql);
     return $resultats->fetchAll(PDO::FETCH_ASSOC);
@@ -19,8 +20,8 @@ function readVehicule($db,$id)
 
 function readtableauResas($db)
 {
-   $sql = "SELECT * FROM tableauresa ORDER BY dateResa ASC";
-      $resultats = $db->query($sql);
+        $sql = "SELECT * FROM tableauresa ORDER BY dateResa ASC";
+        $resultats = $db->query($sql);
     return $resultats->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -34,27 +35,28 @@ function readResa($db,$idResa)
     return $req->fetch();
 }
 
-function readCollaborateurs($db) 
+function readCollaborateurs($db)
 {
     $sql = "SELECT * FROM collaborateurs";
     $resultats = $db->query($sql);
     return $resultats->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function ajoutReservation($db,$annee,$mois,$jour,$idVehicule,$idCollab) 
+function ajoutReservation($db,$annee,$mois,$jour,$idVehicule,$idCollab)
 {
-    $sql="INSERT INTO tableauresa(dateResa,vehiculeResa,collaboResa) VALUES(:dateReserv,:idVehicule,:idCollab)";
+    $sql="INSERT INTO tableauresa(dateResa,vehiculeResa,collaboResa)
+    VALUES(:dateReserv,:idVehicule,:idCollab)";
     $req=$db->prepare($sql);
     $req->bindValue('dateReserv', ( $annee.'-'.$mois.'-'.$jour), PDO::PARAM_STR);
     $req->bindValue('idCollab', $idCollab, PDO::PARAM_STR);
     $req->bindValue('idVehicule', $idVehicule, PDO::PARAM_STR);
-        $req->execute();
+    $req->execute();
     return $req->fetch();
 }
 
 function updateResa($db, $idResa, $dateResa,$collaboResa, $vehiculeResa)
 {
-    $sql="UPDATE tableauresa SET dateResa=:dateResa, collaboResa=:collaboResa, vehiculeResa=:vehiculeResa WHERE idResa=:idResa";
+    $sql="UPDATE tableauresa SET dateResa=:dateResa, collaboResa=:collaboResa, vehiculeResa=:vehiculeResa WHERE idResa = :idResa" ;
     $req=$db->prepare($sql);
     $req->bindValue('dateResa', $dateResa, PDO::PARAM_STR);
     $req->bindValue('collaboResa', $collaboResa, PDO::PARAM_STR);
@@ -64,7 +66,9 @@ function updateResa($db, $idResa, $dateResa,$collaboResa, $vehiculeResa)
     return $req->fetch();
 }
 
-function deleteResa($db, $idResa) 
+function deleteResa(
+    $db,
+    $idResa)
 {
     $sql = "DELETE FROM tableauResa WHERE idResa = :idResa";
     $req=$db->prepare($sql);

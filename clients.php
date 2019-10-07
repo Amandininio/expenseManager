@@ -1,6 +1,6 @@
-<? php
-  require_once('model.php');
-  require_once('functions.php');
+<? php 
+require_once('model.php');
+require_once('functions.php');
 //=====Condition de security & de remplissage formulaire correct=============================================================================================================================================================================//
   if(isset($_SESSION['connection']));
   {
@@ -10,17 +10,17 @@
   $Ville = htmlspecialchars($_SESSION['Ville']);
   $Tel = htmlspecialchars($_SESSION['Tel']);
   $Email = htmlspecialchars($_SESSION ['Email']);
-  $Genre = htmlspecialchars($_SESSION ['Genre']);
+  //$Genre = htmlspecialchars ($_SESSION ['Genre']);
   $Mdp = sha1($_SESSION ['Mdp']);
-  $Mdp2 = sha1($_SESSION ['Mdp2']);
+  $Mdp2 = sha1($_SESSION ['Mdp2']);//
 
-  if(!empty($_SESSION['Prenom']) &&
-      !empty($_SESSION['Nom']) &&
-      !empty($_SESSION['Ville']) &&
-      !empty($_SESSION['Email']) &&
-      !empty($_SESSION['Mdp']) &&
-      !empty($_SESSION['Mdp2']) &&
-      !empty($_SESSION['Tel']));
+  if(!empty($_SESSION['Prenom']) && 
+      !empty($_SESSION['Nom']) && 
+      !empty($_SESSION['Ville']) && 
+      !empty($_SESSION['Email']) && 
+      !empty($_SESSION['Mdp']) && 
+      !empty($_SESSION['Mdp2']) && 
+      !empty($_SESSION['Tel']))
   {
 
     $Prenomlength = strlen($Prenom);
@@ -96,9 +96,9 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="index.php">Home</a></li>
       <li><a href="listerResa.php"> Réservation</a></li>
-      <li><a href="update.php">Modifier réservation</a></li>
+      <li><a href="ListerResa.php">Modifier réservation</a></li>
       <li><a href="clients.php"> Plan & Client</a></li>
-      <li><a href="connection.php"> Compte Utilisateur</a></li>
+      <li><a href="profil.php"> Compte Utilisateur</a></li>
     </ul>
     <!--<button class="btn btn-primary navbar-btn"></button>-->
   </div>
@@ -106,7 +106,8 @@
 <input class="autofocus" type="text" name="search" placeholder="Search">
 </header>
 <!--------------------------------------------------------Header------------------------------------------------------------------------>
-<?php if(isset($_POST['btnUpdate'])); {
+<? php 
+    if(isset($_POST['btnUpdate'])); {
     $idResa = $_POST['idResa'];
     header("location:update.php?idResa=$idResa");
 }
@@ -135,40 +136,40 @@ if(isset($_POST['forminscription']));
                $reqEmail->execute(array($Email));
                $Emailexist = $reqEmail->rowCount();
 
-               if($Emailexist == 0); {
-
-                  if($mdp == $mdp2); {
-
+               if($Emailexist == 0); 
+                  {
+                  if($mdp == $mdp2);
+                  {
                      $insertmbr = $db->prepare("INSERT INTO clients(pseudo, Email, Mdp) VALUES(?, ?, ?)");
                      $insertmbr->execute(array($pseudo, $Email, $mdp));
-                     $erreur = "Votre compte a bien été créé ! <a href=\"connection.php\">Me connecter</a>";
-                  } 
-                  else 
+                     $erreur = "Votre compte a bien été créé ! <a href=\"profil.php\">Me connecter</a>";
+                  }
+                  else
                   {
                      $erreur = "Vos mots de passes ne correspondent pas !";
                   }
-               } 
-               else 
+               }
+               else
                {
                   $erreur = "Adresse mail déjà utilisée !";
                }
-            } 
-            else 
+            }
+            else
             {
                $erreur = "Votre adresse mail n'est pas valide !";
             }
-         } 
-         else 
+         }
+         else
          {
             $erreur = "Vos adresses mail ne correspondent pas !";
          }
-      } 
-      else 
+      }
+      else
       {
          $erreur = "Votre pseudo ne doit pas dépasser 255 caractères !";
       }
-   } 
-   else 
+   }
+   else
    {
       $erreur = "Tous les champs doivent être complétés !";
    }
@@ -178,7 +179,7 @@ if(isset($_POST['forminscription']));
 <body>
 <h1>Page Clients</h1>
 <div id="googleMap" style="width:100%;height:azuto;">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11614.742703174841!2d-0.36542149999999995!3d43.299903799999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1567258368456!5m2!1sfr!2sfr" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="">
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11614.742703174841!2d-0.36542149999999995!3d43.299903799999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1567258368456!5m2!1sfr!2sfr" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="">
 </iframe>
 </div>
 
