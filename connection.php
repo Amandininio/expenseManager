@@ -1,41 +1,29 @@
-<? php 
-   require_once('model.php');
-   require_once('functions.php');
-   $db = new PDO('mysql:host=127.0.0.1;dbname=expensemanager', 'root', '');
+<?php
+session_start();
+
+$db = new PDO('mysql:host=127.0.0.1;dbname=expensemanager', 'root', '');
 
 if(isset($_POST['connection'])) {
-   $Email = htmlspecialchars($_SESSION['Email']);
-   $Mdp = sha1($_SESSION['Mdp']);
-   
-   if(!empty($Email) AND !empty($Mdp)) {
-      $requser = $db->prepare("SELECT * FROM collaborateurs WHERE Email = ? AND Mdp = ?");
-      $requser->execute(array($Email, $Mdp));
-      $userexist = $requser->rowCount();
+    $mailconnect = htmlspecialchars($_POST['mailconnect']);
+    $mdpconnect = sha1($_POST['mdpconnect']);
+
+   if(!empty($mailconnect) AND !empty($mdpconnect)) {
+            $requser = $bdd->prepare("SELECT * FROM collaborateurs WHERE Email = ? AND Mdp = ?");
+            $requser->execute(array($mailconnect, $mdpconnect));
+            $userexist = $requser->rowCount();
 
       if($userexist == 1) {
-         $userinfo = $requser->fetch();
-         $_SESSION['id'] = $userinfo['id'];
-         $_SESSION['pseudo'] = $userinfo['pseudo'];
-         $_SESSION['Email'] = $userinfo['Email'];
-         $_SESSION['Nom'] = $userinfo['Nom'];
-         $_SESSION['id'] = $userinfo['id'];
-         $_SESSION['Mdp'] = $userinfo['Mdp'];
-         $_SESSION['Mdp2'] = $userinfo['Mdp2'];
-         $_SESSION['Prenom'] = $userinfo['Prenom'];
-         $_SESSION['Ville'] = $userinfo['Ville'];
-         $_SESSION['Genre'] = $userinfo['Genre'];
-//=======Redirection de l'utilisateur dans url===================================================================//
-         header("Location: profil.php?id=".$_SESSION['id']);
-//=======Redirection de l'utilisateur dans url===================================================================//
-      } 
-      else 
-      {
-         $erreur = "Mauvais mail ou mot de passe !";
+            $userinfo = $requser->fetch();
+            $_SESSION['id'] = $userinfo['id'];
+            $_SESSION['pseudo'] = $userinfo['pseudo'];
+            $_SESSION['Email'] = $userinfo['Email'];
+            header("Location: profil.php?id=".$_SESSION['id']);
+        } else {
+            $erreur = "Mauvais mail ou mot de passe !";
       }
    } 
-   else 
-   {
-      $erreur = "Tous les champs doivent être complétés !";
+    else {
+        $erreur = "Tous les champs doivent être complétés !";
    }
 }
 ?>
@@ -60,11 +48,11 @@ if(isset($_POST['connection'])) {
       <li class="active"><a href="index.php">Home</a></li>
       <li><a href="listerResa.php"> Réservation</a></li>
       <li><a href="update.php">Modifier réservation</a></li>
-      <li><a href="clients.php"> Plan & Client</a></li>
+      <li><a href="connection.php"> Plan & Client</a></li>
       <li><a href="connection.php"> Compte Utilisateur</a></li>
     </ul>
-    <!--<button class="btn btn-primary navbar-btn"></button>-->
   </div>
+  <li><a href="deconnection.php"><span class="glyphicon glyphicon-log-out"></span>Déconnection</a></li>
 </nav>
 <input class="autofocus" type="text" name="search" placeholder="Search">
 </header>
@@ -76,19 +64,19 @@ if(isset($_POST['connection'])) {
          <br /><br />
          <form method="POST" action="profil.php">
          <div class="col-7">
-                  <input type="email" name="Email" class="form-control" placeholder="Email" value="<?php if(isset($Email)) { echo $Email; } ?>">
+                  <input type="email" name="Email" class="form-control" placeholder="Email" value="<?php if(isset($Email)) /*{ echo $Email; }*/ ?>">
           </div>
           <div class="col-7">
             <input type="password" class="form-control" placeholder="Mot de Passe" name='Mdp' id='Mdp' value="
             <?php 
-            if(isset($Mdp)) {echo $Mdp;}?>">
+            /*if(isset($Mdp)) {echo $Mdp;}*/?>">
           </div>
             <br/><br/>
             <input type="submit" name="connection" value="connection !" class="btn btn-primary"/>
          </form>
          <?php
-         if(isset($erreur)) {
-            echo '<font color="red">'.$erreur."</font>";
+               if(isset($erreur)) {
+                   echo '<font color="red">'.$erreur."</font>";
          }
          ?>
       </div>

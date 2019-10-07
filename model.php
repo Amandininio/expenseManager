@@ -76,3 +76,20 @@ function deleteResa(
     $req->execute();
     return $req->fetch();
 }
+
+
+function ajoutClient($Email, $ID, $Nom, $password, $Prenom, $Tel, $Ville)
+{
+    $sql="INSERT INTO clients(Email,ID,Nom, password, Prenom, Tel, Ville)
+        VALUES('Email:varchar', 'ID:int', 'Nom:varchar', 'password:varchar', 'Prenom:varchar', 'Tel:int', 'Ville:varchar') ";
+                $req= $db ->prepare($sql);
+                $req->bindValue('Email', $Email, PDO::PARAM_STR);
+                $req->bindValue('ID', $ID, PDO::PARAM_STR);
+                $req->bindValue('Nom', $Nom, PDO::PARAM_STR);
+                $req->bindValue('Prenom', $Prenom, PDO::PARAM_STR);
+                $req->bindValue('password', $password, PDO::PARAM_STR);
+                $req->bindValue('Tel', $Tel, PDO::PARAM_STR);
+                $req->bindValue('Ville', $Ville, PDO::PARAM_STR);
+                $req->execute();
+                return $req->fetch();
+}
